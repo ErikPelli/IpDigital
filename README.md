@@ -2,8 +2,6 @@
   <br>
   <img src="/logo/full_nobg.png" alt="IpDigital full logo" width="200">
   <br>
-  IpDigital
-  <br>
 </h1>
 
 <p align="center">
