@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="https://github.com/PCTO-2122/dashboard-design/blob/c65b26abe5f416619ae805975fda5d9a7e5a6292/logo/full_nobg_white.png" alt="IpDigital full logo" width="400">
+  <img src="https://i.imgur.com/2KfsPEd.png" alt="IpDigital full logo" width="400">
   <br>
 </h1>
 
