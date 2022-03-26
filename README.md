@@ -19,6 +19,8 @@
   - [Documentation](/database/documentation.pdf)
   - [Business rules](/database/business_rules.md)
   - [SQL](/database/SQL.pdf)
+* Management
+  - [WBS](/management/WBS/Diagram.png)
 
 ## Credits
 
