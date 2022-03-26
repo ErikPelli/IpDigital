@@ -1,4 +1,3 @@
-
 <h1 align="center">
   <br>
   <img src="/logo/full.png" alt="IpDigital full logo" width="200">
@@ -15,8 +14,6 @@
   <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
-
-![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif)
 
 ## How To Use
 
