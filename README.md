@@ -20,8 +20,13 @@ For the logo files the upload process is the same.
 
 ## Credits
 
-To make this repo files, we used the following softwares:
+To make this repo files, we used the following softwares/websites:
 
+- [Google Docs](https://docs.google.com/)
+- [Diagrams](https://www.diagrams.net/)
+- [dbDiagram](https://dbdiagram.io/)
+- [Graphonline](https://graphonline.ru/)
+- [Gantt Project](https://www.ganttproject.biz/)
 - [Figma](https://www.figma.com/)
 - [Photoshop](https://www.adobe.com/it/products/photoshop.html)
 
