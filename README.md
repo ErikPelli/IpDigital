@@ -13,9 +13,9 @@
 ## Documents
 
 * Database
-  - [ER schema](/database/ER-schema.png)
-  - [ER schema logical restructured](/database/ER-schema-logical-restructured.png)
-  - [Logical schema](/database/logical-schema.png)
+  - [ER diagram](/database/ER-diagram.png)
+  - [ER diagram logical restructured](/database/ER-diagram-logical-restructured.png)
+  - [Logical diagram](/database/logical-diagram.png)
   - [Documentation](/database/documentation.pdf)
   - [Business rules](/database/business_rules.md)
   - [SQL](/database/SQL.pdf)
