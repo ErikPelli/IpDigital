@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  <a href="#content">Documents</a> •
+  <a href="#documents">Documents</a> •
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
