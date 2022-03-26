@@ -17,6 +17,7 @@
   - [ER schema logical restructured](/database/ER-schema-logical-restructured.png)
   - [Logical schema](/database/logical-schema.png)
   - [Documentation](/database/documentation.pdf)
+  - [Business rules](/database/business_rules.md)
   - [SQL](/database/SQL.pdf)
 
 ## Credits
