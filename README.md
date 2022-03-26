@@ -12,6 +12,8 @@
 
 ## Documents
 
+* Management
+  - [WBS](/management/WBS/Diagram.png)
 * Database
   - [ER diagram](/database/ER-diagram.png)
   - [ER diagram logical restructured](/database/ER-diagram-logical-restructured.png)
@@ -19,8 +21,6 @@
   - [Documentation](/database/documentation.pdf)
   - [Business rules](/database/business_rules.md)
   - [SQL](/database/SQL.pdf)
-* Management
-  - [WBS](/management/WBS/Diagram.png)
 
 ## Credits
 
