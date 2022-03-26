@@ -5,12 +5,12 @@
 </h1>
 
 <p align="center">
-  <a href="#content">Content</a> •
+  <a href="#content">Documents</a> •
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
 
-## Content
+## Documents
 
 * Database
   - [ER schema](/database/ER-schema.png)
