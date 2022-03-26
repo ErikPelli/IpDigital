@@ -31,11 +31,6 @@ To make this repo files, we used the following softwares:
 
 [dashboard-docs](https://github.com/PCTO-2122/dashboard-docs) - Documents of IpDigital Dashboard
 
-## You may also like...
-
-- [Pomolectron](https://github.com/amitmerchant1990/pomolectron) - A pomodoro app
-- [Correo](https://github.com/amitmerchant1990/correo) - A menubar/taskbar Gmail App for Windows and macOS
-
 ## License
 
 MIT
