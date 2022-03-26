@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="/logo/full_nobg.png" alt="IpDigital full logo" width="400">
+  <img src="/logo/full_nobg_white.png" alt="IpDigital full logo" width="400">
   <br>
 </h1>
 
