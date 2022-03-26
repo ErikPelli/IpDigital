@@ -1,12 +1,10 @@
 <h1 align="center">
   <br>
-  <img src="/logo/full.png" alt="IpDigital full logo" width="200">
+  <img src="/logo/full_nobg.png" alt="IpDigital full logo" width="200">
   <br>
   IpDigital
   <br>
 </h1>
-
-<h4 align="center">IpDigital design.</h4>
 
 <p align="center">
   <a href="#how-to-use">How To Use</a> •
