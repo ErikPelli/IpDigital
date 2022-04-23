@@ -14,6 +14,8 @@
 
 * Management
   - [WBS](/management/WBS/Diagram.png)
+  - [CPM](/management/CPM/Diagram.png)
+  - [GANTT](/management/GANTT/Diagram.png)
 * Database
   - [ER diagram](/database/ER-diagram.png)
   - [ER diagram logical restructured](/database/ER-diagram-logical-restructured.png)
