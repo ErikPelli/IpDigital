@@ -11,7 +11,7 @@
   <a href="#license">License</a>
 </p>
 
-![Dashboard](/storyboard/exported?raw=true "Dashboard")
+![Dashboard](/storyboard/exported/Dashboard.png?raw=true "Dashboard")
 
 ## How To Use
 
