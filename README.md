@@ -11,6 +11,8 @@
   <a href="#license">License</a>
 </p>
 
+![Dashboard](/storyboard/exported?raw=true "Dashboard")
+
 ## How To Use
 
 To work on the storyboard figma files you need to sign-up on [Figma](https://www.figma.com/) website and then import the .fig file.
