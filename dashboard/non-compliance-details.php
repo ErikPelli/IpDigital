@@ -15,7 +15,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Non compliance - ipDigital</title>
+    <title>Non compliance details - ipDigital</title>
 
     <!-- TABLER (https://github.com/tabler/tabler) -->
     <script src="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/js/tabler.min.js"></script>
@@ -143,100 +143,65 @@
                                 Overview
                             </div>
                             <h2 class="page-title">
-                                Non compliance
+                                Non compliance details
                             </h2>
-                        </div>
-                        <!-- Page title actions -->
-                        <div class="col-12 col-md-auto ms-auto d-print-none">
-                            <div class="btn-list">
-                                <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                                    data-bs-target="#modal-new-non-compliance">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <line x1="12" y1="5" x2="12" y2="19" />
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                    </svg>
-                                    Add new
-                                </a>
-                                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-new-non-compliance" aria-label="Create new report">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <line x1="12" y1="5" x2="12" y2="19" />
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                    </svg>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="page-body">
                 <div class="container-xl">
-                    <div class="card">
-                        <div class="table-responsive">
-                            <table class="table table-vcenter card-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Manager</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th class="w-1"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                        $nonCompliances = getNonCompliances(10, 1);
-                                        $nonCompliancesType = getNonComplianceTypes();
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>ID #<?php echo $_GET['id']; ?></h3>
+                                <?php
+                                    $ncDetails = getNonComplianceDetails($_GET['id']);
+                                    $ncTypeDetails = getNonComplianceTypeDetails($ncDetails);
+                                    $ncStatus = getNonComplianceStatus($ncDetails);
+                                    $ncManager = getNonComplianceManager($ncDetails);
 
-                                        foreach($nonCompliances["result"] as $ncList) {
-                                            $nc = getNonComplianceDetails($ncList["nonComplianceCode"]);
-                                            
-                                            $ncID = "";
-                                            switch ($nc["result"]["origin"]) {
-                                                case "internal":
-                                                    $ncID = "I-" . $ncList["nonComplianceCode"];
-                                                    break;
-                                                case "customer":
-                                                    $ncID = "C-" . $ncList["nonComplianceCode"];
-                                                    break;
-                                                case "supplier":
-                                                    $ncID = "S-" . $ncList["nonComplianceCode"];
-                                                    break;
-                                                default:
-                                                    $ncID = $ncList["nonComplianceCode"];
-                                            }
+                                    echo '
+                                        <ul class="list-unstyled">
+                                            <li>Name: ' . $ncTypeDetails["name"] . '</li>
+                                            <li>Description: ' . $ncTypeDetails["description"] . '</li>
+                                            <li>Details: ' . $ncDetails["result"]["comment"] . '</li>
+                                            <li>Manager: ' . $ncManager . '</li>
+                                            <li>Origin: ' . $ncDetails["result"]["origin"] . '</li>
+                                            <li>Type: ' . $ncDetails["result"]["nonComplianceType"] . '</li>
+                                            <li>Lot: ' . $ncDetails["result"]["shippingLot"] . '</li>
+                                            <li>Status: ' . $ncStatus . '</li>
+                                            <li>Creation date: ' . $ncDetails["result"]["nonComplianceDate"] . '</li>
+                                    ';
 
-                                            $ncTypeDetails = getNonComplianceTypeDetails($nc);
-                                            $manager = getNonComplianceManager($nc);
-                                            $ncStatus = getNonComplianceStatus($nc);
+                                    if ($ncStatus === "Closed") {
+                                        echo '
+                                            <li>Analysis end date: ' . $ncDetails["result"]["analysisEndDate"] . '</li>
+                                            <li>Check end date: ' . $ncDetails["result"]["checkEndDate"] . '</li>
+                                            <li>Result: ' . $ncDetails["result"]["result"] . '</li>
+                                        ';
+                                    } elseif ($ncStatus === "Review") {
+                                        echo '
+                                            <li>Analysis end date: ' . $ncDetails["result"]["analysisEndDate"] . '</li>
+                                        ';
+                                    }
+                                ?>
+                            </div>
+                            <div class="card-footer">
+                                <?php
+                                    if ($ncStatus != "Closed") {
+                                        echo '
+                                            <a href="#" class="btn btn-warning d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-danger">Update Status</a>
+                                        ';
+                                    }
 
-                                            echo '
-                                                <tr>
-                                                    <td class="text-muted">' . $ncID . '</td>
-                                                    <td>' . $ncTypeDetails["name"] . '</td>
-                                                    <td class="text-muted">
-                                                        <a href="#" class="text-reset">' . $manager . '</a>
-                                                    </td>
-                                                    <td class="text-muted">' . $nc["result"]["nonComplianceDate"] . '</td>
-                                                    <td class="text-muted">' . $ncStatus . '</td>
-                                                    <td>
-                                                        <a href="./non-compliance-details.php?id=' . $ncList["nonComplianceCode"] . '">Details</a>
-                                                    </td>
-                                                </tr>
-                                            ';
-                                        }
-                                    ?>
-                                </tbody>
-                            </table>
+                                    if ($ncManager === "Unassigned Manager") {
+                                        echo '
+                                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-assign-manager">Assign Manager</a>
+                                        ';
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -278,100 +243,27 @@
         </div>
     </div>
 
-
-    <!-- Add new non compliance modal -->
-    <div class="modal modal-blur fade" id="modal-new-non-compliance" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Assign manager modal -->
+    <div class="modal modal-blur fade" id="modal-assign-manager" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form action="./backend/add-non-compliance.php" method="get">
+                <form action="./backend/assign-manager.php" method="get">
                     <div class="modal-header">
-                        <h5 class="modal-title">New non compliance</h5>
+                        <h5 class="modal-title">Assign Non compliance Manager</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <div class="form-label">Type</div>
-                            <select class="form-select" id="type" name="type">
+                            <div class="form-label">Manager</div>
+                            <select class="form-select" id="manager" name="manager">
                                 <?php
-                                    $nonCompliancesType = getNonComplianceTypes();
+                                    $managers = getUsers();
 
-                                    foreach($nonCompliancesType["result"] as $ncTypeCode) {
-                                        echo '<option value=' . $ncTypeCode["code"] . '>' . $ncTypeCode["name"] . '</option>';
+                                    foreach($managers["result"] as $manager) {
+                                        echo '<option value=' . $manager["email"] . '>' . $manager["email"] . '</option>';
                                     }
                                 ?>
                             </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Lot</label>
-                            <select type="text" class="form-select" placeholder="Select a lot" id="lot" name="lot" value="">
-                                <?php
-                                    $lotList = getLots();
-
-                                    foreach($lotList["result"] as $lot) {
-                                        echo '<option value=' . $lot["shippingCode"] . '>' . $lot["shippingCode"] . '</option>';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-
-                        <label class="form-label">Origin</label>
-                        <div class="form-selectgroup-boxes row mb-3">
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="internal" class="form-selectgroup-input"
-                                        checked />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Internal</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="customer" class="form-selectgroup-input" />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Customer</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="supplier" class="form-selectgroup-input" />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Supplier</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div>
-                                <label class="form-label">Additional information</label>
-                                <textarea class="form-control" id="details" name="details" rows="3"></textarea>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -384,6 +276,37 @@
             </div>
         </div>
     </div>
+
+    <!-- Update status confirm -->
+    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="./backend/update-non-compliance-status.php" method="get">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9v2m0 4v.01" /><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" /></svg>
+                    <h3>Are you sure?</h3>
+                    <div class="text-muted">Do you really want to update the non compliance status from <?php echo $ncStatus . ' to ' . getNextNonComplianceStatus($ncStatus); ?>.</div>
+                    <input type="hidden" id="noncompliance" name="noncompliance" value="<?php echo $_GET['id']; ?>">
+                    <input type="hidden" id="status" name="status" value="<?php echo $ncStatus; ?>">
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                    <div class="row">
+                        <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                            Cancel
+                        </a></div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-danger w-100" data-bs-dismiss="modal">Update</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
 </body>
 
 </html>
