@@ -1,3 +1,13 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION['email'])) {
+        header("Location: ../auth/sign-in.html");
+    }
+
+    require_once '../utils/api.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,8 +48,15 @@
                             <span class="avatar avatar-sm"
                                 style="background-image: url(../static/avatars/000m.jpg)"></span>
                             <div class="d-none d-xl-block ps-2">
-                                <div>Paweł Kuna</div>
-                                <div class="mt-1 small text-muted">UI Designer</div>
+                                <?php
+                                    $user_data = getUserData($_SESSION['email']);
+                                    $settings_data = getSettingsData($_SESSION['email']);
+                                    
+                                    echo '
+                                        <div>' . $user_data["result"]["firstName"] . ' ' . $user_data["result"]["lastName"] . '</div>
+                                        <div class="mt-1 small text-muted">' . $settings_data["result"]["role"] . '</div>
+                                    ';
+                                ?>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -47,8 +64,8 @@
                             <a href="#" class="dropdown-item">Profile & account</a>
                             <a href="#" class="dropdown-item">Feedback</a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Logout</a>
+                            <a href="./account.php" class="dropdown-item">Settings</a>
+                            <a href="../auth/backend/logout.php" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +73,7 @@
                     <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="./index.html">
+                                <a class="nav-link" href="./index.php">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/home -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -74,7 +91,7 @@
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="./non-compliance.html">
+                                <a class="nav-link" href="./non-compliance.php">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/archive -->
                                         <svg xmlns="http://www.w3.org/2000/svg"

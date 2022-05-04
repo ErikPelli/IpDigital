@@ -19,21 +19,29 @@
                 <a href="." class="navbar-brand navbar-brand-autodark"><img src="../static/logo.svg" height="36"
                         alt=""></a>
             </div>
-            <form class="card card-md" action="." method="get">
+            <form class="card card-md" action="./backend/sign-up.php" method="post">
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Create new account</h2>
                     <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control" placeholder="Enter name">
+                        <label class="form-label">Firstname</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Enter firstname" maxlength="32" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Lastname</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Enter lastname" maxlength="32" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Fiscal Code</label>
+                        <input type="text" id="fiscalcode" name="fiscalcode" class="form-control" placeholder="Enter fiscal code" minlength="16" maxlength="16" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email address</label>
-                        <input type="email" class="form-control" placeholder="Enter email">
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter email" maxlength="254" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <div class="input-group input-group-flat">
-                            <input type="password" class="form-control" placeholder="Password" autocomplete="off">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password" autocomplete="off" required >
                             <span class="input-group-text">
                                 <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
@@ -51,7 +59,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-check">
-                            <input type="checkbox" class="form-check-input" />
+                            <input type="checkbox" id="legal" name="legal" class="form-check-input" required />
                             <span class="form-check-label">Agree the <a href="../legal/terms-of-service.html"
                                     tabindex="-1">terms and policy</a>.</span>
                         </label>
