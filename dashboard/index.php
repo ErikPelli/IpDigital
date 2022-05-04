@@ -153,6 +153,9 @@
                     <div class="row row-deck row-cards">
                         <div class="col-12">
                             <div class="row row-cards">
+                                <?php
+                                    $nonCompliancesAnalytics = getNonCompliancesAnalytics();
+                                ?>
                                 <div class="col-sm-6 col-lg-3">
                                     <div class="card card-sm">
                                         <div class="card-body">
@@ -173,7 +176,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        132 New
+                                                        <?php echo $nonCompliancesAnalytics["result"]["totalNonCompliances"]["new"]; ?> New
                                                     </div>
                                                     <div class="text-muted">
                                                         12 today
@@ -203,7 +206,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        78 In progress
+                                                        <?php echo $nonCompliancesAnalytics["result"]["totalNonCompliances"]["progress"]; ?> In progress
                                                     </div>
                                                     <div class="text-muted">
                                                         32 today
@@ -233,7 +236,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        623 Review
+                                                        <?php echo $nonCompliancesAnalytics["result"]["totalNonCompliances"]["review"]; ?> Review
                                                     </div>
                                                     <div class="text-muted">
                                                         16 today
@@ -263,7 +266,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        132 Closed
+                                                        <?php echo $nonCompliancesAnalytics["result"]["totalNonCompliances"]["closed"]; ?> Closed
                                                     </div>
                                                     <div class="text-muted">
                                                         21 today

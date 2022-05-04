@@ -49,6 +49,11 @@
         return apiRequest('POST', 'settings', $jsonData);
     }
 
+    function getNonCompliancesAnalytics() {
+        $jsonData = array();
+        return apiRequest('POST', 'noncompliances', $jsonData);
+    }
+
 
     function getNonCompliances($resultsPerPage, $pageNumber) {
         $jsonData = array(
