@@ -15,7 +15,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tickets - ipDigital</title>
+    <title>Ticket details - ipDigital</title>
 
     <!-- TABLER (https://github.com/tabler/tabler) -->
     <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler.min.css">
@@ -99,7 +99,7 @@
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="./tickets.php">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/ticket -->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@
                                 Overview
                             </div>
                             <h2 class="page-title">
-                                Tickets
+                                Ticket details
                             </h2>
                         </div>
                     </div>
@@ -144,42 +144,87 @@
             </div>
             <div class="page-body">
                 <div class="container-xl">
-                    <div class="card">
-                        <div class="table-responsive">
-                            <table class="table table-vcenter card-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Shipping Code</th>
-                                        <th>Description</th>
-                                        <th>Customer</th>
-                                        <th>Status</th>
-                                        <th class="w-1"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                        $tickets = getTickets(10, 1);
-
-                                        foreach($tickets["result"] as $ticket) {
-                                            $ticketDetails = getTicket($ticket["vatNum"], $ticket["nonComplianceCode"]);
-
-                                            echo '
-                                                <tr>
-                                                    <td class="text-muted">' . $ticket["vatNum"] . '-' . $ticket["nonComplianceCode"] . '</td>
-                                                    <td class="text-muted">' . $ticketDetails["result"]["shippingCode"] . '</td>
-                                                    <td>' . $ticketDetails["result"]["description"] . '</td>
-                                                    <td class="text-muted">' . $ticketDetails["result"]["customerCompanyName"] . '</td>
-                                                    <td class="text-muted">' . $ticketDetails["result"]["status"] . '</td>
-                                                    <td>
-                                                        <a href="./ticket.php?vatNum=' . $ticket["vatNum"] . '&nonComplianceCode=' . $ticket["nonComplianceCode"] . '">Details</a>
-                                                    </td>
-                                                </tr>
-                                            ';
-                                        }
-                                    ?>
-                                </tbody>
-                            </table>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">Info about #<?= $_GET['vatNum'] . '-' . $_GET['nonComplianceCode'] ?></div>
+                                <?php
+                                    $ticketDetails = getTicket($_GET['vatNum'], $_GET['nonComplianceCode'])["result"];
+                                ?>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-description" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                                        <path d="M9 17h6"></path>
+                                        <path d="M9 13h6"></path>
+                                    </svg>
+                                    Description: <strong><?= $ticketDetails["description"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-skyscraper" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <line x1="3" y1="21" x2="21" y2="21"></line>
+                                        <path d="M5 21v-14l8 -4v18"></path>
+                                        <path d="M19 21v-10l-6 -4"></path>
+                                        <line x1="9" y1="9" x2="9" y2="9.01"></line>
+                                        <line x1="9" y1="12" x2="9" y2="12.01"></line>
+                                        <line x1="9" y1="15" x2="9" y2="15.01"></line>
+                                        <line x1="9" y1="18" x2="9" y2="18.01"></line>
+                                    </svg>
+                                    Customer Company: <strong><?= $ticketDetails["customerCompanyName"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <circle cx="12" cy="11" r="3"></circle>
+                                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+                                    </svg>
+                                    Customer Company Address: <strong><?= $ticketDetails["customerCompanyAddress"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-package" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
+                                        <line x1="12" y1="12" x2="20" y2="7.5"></line>
+                                        <line x1="12" y1="12" x2="12" y2="21"></line>
+                                        <line x1="12" y1="12" x2="4" y2="7.5"></line>
+                                        <line x1="16" y1="5.25" x2="8" y2="9.75"></line>
+                                    </svg>
+                                    Shipping: <strong><?= $ticketDetails["shippingCode"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <circle cx="6" cy="19" r="2"></circle>
+                                        <circle cx="17" cy="19" r="2"></circle>
+                                        <path d="M17 17h-11v-14h-2"></path>
+                                        <path d="M6 5l14 1l-1 7h-13"></path>
+                                    </svg>
+                                    Product Quantity: <strong><?= $ticketDetails["productQuantity"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-report-analytics" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                                        <rect x="9" y="3" width="6" height="4" rx="2"></rect>
+                                        <path d="M9 17v-5"></path>
+                                        <path d="M12 17v-1"></path>
+                                        <path d="M15 17v-3"></path>
+                                    </svg>
+                                    Status: <strong><?= $ticketDetails["status"] ?></strong>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <?php
+                                    if ($ticketDetails["status"] !== "closed") {
+                                        echo '
+                                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-answer-ticket">Answer</a>
+                                            <a href="#" class="btn btn-danger d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-close-ticket">Close</a>
+                                        ';
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -221,99 +266,22 @@
         </div>
     </div>
 
-
-    <!-- Add new non compliance modal -->
-    <div class="modal modal-blur fade" id="modal-new-non-compliance" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Answer ticket modal -->
+    <div class="modal modal-blur fade" id="modal-answer-ticket" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form action="./backend/add-non-compliances.php" method="get">
+                <form action="./backend/answer-ticket.php" method="get">
                     <div class="modal-header">
-                        <h5 class="modal-title">New non compliance</h5>
+                        <h5 class="modal-title">Set Ticket Answer</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <div class="form-label">Type</div>
-                            <select class="form-select" id="type" name="type">
-                                <?php
-                                    $nonCompliancesType = getNonComplianceTypes();
-
-                                    foreach($nonCompliancesType["result"] as $ncTypeCode) {
-                                        echo '<option value=' . $ncTypeCode["code"] . '>' . $ncTypeCode["name"] . '</option>';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Lot</label>
-                            <select type="text" class="form-select" placeholder="Select a lot" id="lot" name="lot" value="">
-                                <?php
-                                    $lotList = getLots();
-
-                                    foreach($lotList["result"] as $lot) {
-                                        echo '<option value=' . $lot["shippingCode"] . '>' . $lot["shippingCode"] . '</option>';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-
-                        <label class="form-label">Origin</label>
-                        <div class="form-selectgroup-boxes row mb-3">
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="internal" class="form-selectgroup-input"
-                                        checked />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Internal</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="customer" class="form-selectgroup-input" />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Customer</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="supplier" class="form-selectgroup-input" />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Supplier</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
+                        <input type="hidden" id="vatNum" name="vatNum" value="<?= $_GET['vatNum'] ?>">
+                        <input type="hidden" id="nonComplianceCode" name="nonComplianceCode" value="<?= $_GET['nonComplianceCode'] ?>">
                         <div class="col-lg-12">
                             <div>
-                                <label class="form-label">Additional information</label>
-                                <textarea class="form-control" id="details" name="details" rows="3"></textarea>
+                                <label class="form-label">Answer</label>
+                                <textarea class="form-control" id="answer" name="answer" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -325,6 +293,37 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+
+    <!-- Close ticket confirm -->
+    <div class="modal modal-blur fade" id="modal-close-ticket" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="./backend/close-ticket.php" method="get">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9v2m0 4v.01" /><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" /></svg>
+                    <h3>Are you sure?</h3>
+                    <div class="text-muted">Do you really want to close this ticket.</div>
+                    <input type="hidden" id="vatNum" name="vatNum" value="<?= $_GET['vatNum'] ?>">
+                    <input type="hidden" id="nonComplianceCode" name="nonComplianceCode" value="<?= $_GET['nonComplianceCode'] ?>">
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                    <div class="row">
+                        <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                            Cancel
+                        </a></div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 

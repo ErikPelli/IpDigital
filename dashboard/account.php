@@ -148,10 +148,10 @@
                         <div class="card">
                         <div class="card-body p-4 text-center">
                             <span class="avatar avatar-xl mb-3 avatar-rounded" style="background-image: url(../static/avatars/000m.png)"></span>
-                            <h3 class="m-0 mb-1"><a href="#"><?php echo $user_data["result"]["firstName"] . ' ' . $user_data["result"]["lastName"]; ?></a></h3>
-                            <div class="text-muted"><?php echo $settings_data["result"]["job"]; ?></div>
+                            <h3 class="m-0 mb-1"><a href="#"><?= $user_data["result"]["firstName"] . ' ' . $user_data["result"]["lastName"] ?></a></h3>
+                            <div class="text-muted"><?= $settings_data["result"]["job"] ?></div>
                             <div class="mt-3">
-                            <span class="badge bg-purple-lt"><?php echo $settings_data["result"]["role"]; ?></span>
+                            <span class="badge bg-purple-lt"><?= $settings_data["result"]["role"] ?></span>
                             </div>
                         </div>
                         <div class="d-flex">
@@ -225,18 +225,18 @@
                             <div class="row g-2">
                                 <div class="col">
                                     <input type="text" class="form-control" id="firstname" name="firstname"
-                                        placeholder="Firstname" value="<?php echo $user_data["result"]["firstName"]; ?>" disabled>
+                                        placeholder="Firstname" value="<?= $user_data["result"]["firstName"] ?>" disabled>
                                 </div>
                                 <div class="col">
                                     <input type="text" class="form-control" id="lastname" name="lastname"
-                                        placeholder="Lastname" value="<?php echo $user_data["result"]["lastName"]; ?>" disabled>
+                                        placeholder="Lastname" value="<?= $user_data["result"]["lastName"] ?>" disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Fiscal Code</label>
                             <input type="text" class="form-control" id="fiscalcode" name="fiscalcode"
-                                placeholder="Password" value="<?php echo $user_data["result"]["fiscalCode"]; ?>" disabled />
+                                placeholder="Password" value="<?= $user_data["result"]["fiscalCode"] ?>" disabled />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Email</label>

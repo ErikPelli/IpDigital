@@ -203,4 +203,26 @@
         return apiRequest('GET', 'ticket', $jsonData);
     }
 
+    function getTicketsAnalytics() {
+        $jsonData = array();
+        return apiRequest('POST', 'tickets', $jsonData);
+    }
+
+    function setTicketAnswer($vat, $nonCompliance, $answer) {
+        $jsonData = array(
+            'vat' => $vat,
+            'nonCompliance' => $nonCompliance,
+            'answer' => $answer
+        );
+        return apiRequest('POST', 'ticket', $jsonData);
+    }
+
+    function closeTicket($vat, $nonCompliance) {
+        $jsonData = array(
+            'vat' => $vat,
+            'nonCompliance' => $nonCompliance
+        );
+        return apiRequest('DELETE', 'ticket', $jsonData);
+    }
+
 ?>

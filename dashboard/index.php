@@ -169,7 +169,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        <?php echo $nonCompliancesAnalytics["result"]["totalNonCompliances"]["new"]; ?> New
+                                                        <?= $nonCompliancesAnalytics["result"]["totalNonCompliances"]["new"] ?> New
                                                     </div>
                                                     <div class="text-muted">
                                                         12 today
@@ -199,7 +199,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        <?php echo $nonCompliancesAnalytics["result"]["totalNonCompliances"]["progress"]; ?> In progress
+                                                        <?= $nonCompliancesAnalytics["result"]["totalNonCompliances"]["progress"] ?> In progress
                                                     </div>
                                                     <div class="text-muted">
                                                         32 today
@@ -229,7 +229,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        <?php echo $nonCompliancesAnalytics["result"]["totalNonCompliances"]["review"]; ?> Review
+                                                        <?= $nonCompliancesAnalytics["result"]["totalNonCompliances"]["review"] ?> Review
                                                     </div>
                                                     <div class="text-muted">
                                                         16 today
@@ -259,7 +259,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        <?php echo $nonCompliancesAnalytics["result"]["totalNonCompliances"]["closed"]; ?> Closed
+                                                        <?= $nonCompliancesAnalytics["result"]["totalNonCompliances"]["closed"] ?> Closed
                                                     </div>
                                                     <div class="text-muted">
                                                         21 today
@@ -290,7 +290,7 @@
                                                             id="sparkline-activity"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div>Ticket: 6</div>
+                                                        <div>Ticket: <?= getTicketsAnalytics()["result"]["totalTickets"] ?></div>
                                                         <div class="text-muted">
                                                             <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
                                                             <svg xmlns="http://www.w3.org/2000/svg"
