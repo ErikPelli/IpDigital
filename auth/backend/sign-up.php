@@ -40,19 +40,29 @@
                 &&
                 (checkChar($password) && checkCharDb($password))
             ) {
-                $response = signUp($fiscalcode, $firstname , $lastname, $email, $password);
-    
-                if ($response["success"]) {
-                    session_start();
-                    $_SESSION['email'] = $email;
-    
-                    header("Location: ../../dashboard/index.php");
+                $emailTester = getSettingsData($email);
+                if ($emailTester["success"] === false) {
+                    if ($emailTester["error"] === "User doesn't exist") {
+                        $response = signUp($fiscalcode, $firstname , $lastname, $email, $password);
+        
+                        if ($response["success"]) {
+                            session_start();
+                            $_SESSION['email'] = $email;
+            
+                            header("Location: ../../dashboard/index.php");
+                        } else {
+                            // API request faild
+                            header("Location: ../sign-up.php?error=genericInternalError");
+                        }
+                    } else {
+                        header("Location: ../sign-up.php?error=genericError");
+                    }
                 } else {
-                    // API request faild
-                    echo 'Errore nella registrazione dell\'utente';
+                    header("Location: ../sign-up.php?error=userAlreadyExist");
                 }
             } else {
-                echo "Inserimento dati non corretto";
+                // Wrong input data format
+                header("Location: ../sign-up.php?error=wrongDataInputFormat");
             }
         }
     }

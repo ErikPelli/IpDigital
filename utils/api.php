@@ -181,6 +181,24 @@
         return apiRequest('POST', 'noncompliance', $jsonData);
     }
 
+    function updateNonComplianceManager($nonCompliance, $manager) {
+        $jsonData = array(
+            'nonCompliance' => $nonCompliance,
+            'status' => 'analysys',
+            'manager' => $manager
+        );
+        return apiRequest('POST', 'noncompliance', $jsonData);
+    }
+
+    function setNonComplianceResultComment($nonCompliance, $resultComment) {
+        $jsonData = array(
+            'nonCompliance' => $nonCompliance,
+            'status' => 'result',
+            'resultComment' => $resultComment
+        );
+        return apiRequest('POST', 'noncompliance', $jsonData);
+    }
+
     function getLots() {
         $jsonData = array(
             'limit' => false
@@ -216,6 +234,17 @@
             'answer' => $answer
         );
         return apiRequest('POST', 'ticket', $jsonData);
+    }
+
+    function getTicketAnswer($ticket) {
+        $answer = "";
+        if (array_key_exists("ticketAnswer", $ticket["result"])) {
+            $answer = $ticket["result"]["ticketAnswer"];
+        } else {
+            $answer = 'No Answer';
+        }
+
+        return $answer;
     }
 
     function closeTicket($vat, $nonCompliance) {

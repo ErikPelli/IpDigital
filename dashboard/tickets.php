@@ -168,7 +168,7 @@
                                                 <tr>
                                                     <td class="text-muted">' . $ticket["vatNum"] . '-' . $ticket["nonComplianceCode"] . '</td>
                                                     <td class="text-muted">' . $ticketDetails["result"]["shippingCode"] . '</td>
-                                                    <td>' . $ticketDetails["result"]["description"] . '</td>
+                                                    <td>' . $ticketDetails["result"]["problemDescription"] . '</td>
                                                     <td class="text-muted">' . $ticketDetails["result"]["customerCompanyName"] . '</td>
                                                     <td class="text-muted">' . $ticketDetails["result"]["status"] . '</td>
                                                     <td>
@@ -182,6 +182,27 @@
                             </table>
                         </div>
                     </div>
+
+                    <?php
+                        if (isset($_GET['error'])) {
+                            $error = $_GET['error'];
+                            
+                            if (!empty($error)) {
+                                $errorMsg = "";
+
+                                switch ($error) {
+                                    case 'genericInternalError':
+                                        $errorMsg = "We are sorry but your request could not be handled. Please try again. If the problem persists, contact your system administrator.";
+                                        break;
+                                    case 'wrongDataInputFormat':
+                                        $errorMsg = "Please make sure you have completed all fields correctly.";
+                                        break;
+                                }
+
+                                echo '<div class="text-danger">' . $errorMsg . '</div>';
+                            }
+                        }
+                    ?>
                 </div>
             </div>
             <footer class="footer footer-transparent d-print-none">
@@ -189,29 +210,15 @@
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item">
-                                    <a href="./docs/index.html" class="link-secondary">Documentation</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./license.html" class="link-secondary">License</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="https://github.com/PCTO-2122" target="_blank" class="link-secondary"
-                                        rel="noopener">Source code</a>
-                                </li>
+                                <li class="list-inline-item">v1.0.0</li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
                                     Copyright &copy; 2022
-                                    <a href="." class="link-secondary">ipDigital</a>. All rights
-                                    reserved.
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                        v1.0.0
-                                    </a>
+                                    <a href="." class="link-secondary">ipDigital</a>.
+                                    All rights reserved.
                                 </li>
                             </ul>
                         </div>

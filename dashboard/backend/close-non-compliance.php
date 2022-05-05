@@ -3,21 +3,15 @@
 
     session_start();
 
-    $type = $_GET['type'];
-    $lot = $_GET['lot'];
-    $origin = $_GET['nc-origin'];
-    $details = $_GET['details'];
+    $nonCompliance = $_GET['nonCompliance'];
+    $resultComment = $_GET['resultComment'];
 
     if (
-        (checkChar($type) && checkCharDb($type)) 
+        (checkChar($nonCompliance) && checkCharDb($nonCompliance))
         &&
-        (checkChar($lot) && checkCharDb($lot))
-        &&
-        (checkChar($origin) && checkCharDb($origin))
-        &&
-        (checkChar($details) && checkCharDb($details))
+        (checkChar($resultComment) && checkCharDb($resultComment))
     ) {
-        $response = addNonCompliance($origin, $lot, $type, $details);
+        $response = setNonComplianceResultComment($nonCompliance, $resultComment);
 
         if ($response["success"]) {
             header("Location: ../non-compliances.php");

@@ -26,7 +26,7 @@
                     $_SESSION['email'] = $email;
     
                     if(!empty($_POST["remember"])) {
-                        setcookie("user_login", $_POST["email"], time()+ (10 * 365 * 24 * 60 * 60), "/dashboard/auth");
+                        setcookie("user_login", $_POST["email"], time()+ (10 * 365 * 24 * 60 * 60), "/auth");
                     } else {
                         if (isset($_COOKIE["user_login"])) {
                             setcookie("user_login", "");

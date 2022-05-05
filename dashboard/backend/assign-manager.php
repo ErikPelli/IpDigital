@@ -3,19 +3,23 @@
 
     session_start();
 
+    $nonCompliance = $_GET['nonCompliance'];
     $manager = $_GET['manager'];
 
     if (
+        (checkChar($nonCompliance) && checkCharDb($nonCompliance)) 
+        &&
         (checkChar($manager) && checkCharDb($manager)) 
     ) {
-        $response = ""; // DA FINIRE
+        $response = updateNonComplianceManager($nonCompliance, $manager);
 
         if ($response["success"]) {
             header("Location: ../non-compliances.php");
         } else {
-            echo 'Errore, non è stato possibile assegnare un manager';
+            // API request faild
+            header("Location: ../non-compliances.php?error=genericInternalError");
         }
     } else {
-        echo "Inserimento dati non corretto";
+        header("Location: ../non-compliances.php?error=wrongDataInputFormat");
     }
 ?>

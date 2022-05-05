@@ -146,47 +146,63 @@
                 <div class="container-xl">
                     <div class="col-md-6 col-lg-12">
                         <div class="card">
-                        <div class="card-body p-4 text-center">
-                            <span class="avatar avatar-xl mb-3 avatar-rounded" style="background-image: url(../static/avatars/000m.png)"></span>
-                            <h3 class="m-0 mb-1"><a href="#"><?= $user_data["result"]["firstName"] . ' ' . $user_data["result"]["lastName"] ?></a></h3>
-                            <div class="text-muted"><?= $settings_data["result"]["job"] ?></div>
-                            <div class="mt-3">
-                            <span class="badge bg-purple-lt"><?= $settings_data["result"]["role"] ?></span>
+                            <div class="card-body p-4 text-center">
+                                <span class="avatar avatar-xl mb-3 avatar-rounded" style="background-image: url(../static/avatars/000m.png)"></span>
+                                <h3 class="m-0 mb-1"><a href="#"><?= $user_data["result"]["firstName"] . ' ' . $user_data["result"]["lastName"] ?></a></h3>
+                                <div class="text-muted"><?= $settings_data["result"]["job"] ?></div>
+                                <div class="mt-3">
+                                <span class="badge bg-purple-lt"><?= $settings_data["result"]["role"] ?></span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex">
-                            <a href="#" class="card-btn" data-bs-toggle="modal" data-bs-target="#modal-account-details"><!-- Download SVG icon from http://tabler-icons.io/i/mail -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                            </svg>
-                            Account</a>
-                            <a href="#" class="card-btn" data-bs-toggle="modal" data-bs-target="#modal-edit-account"><!-- Download SVG icon from http://tabler-icons.io/i/phone -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <rect x="3" y="7" width="18" height="13" rx="2"></rect>
-                                <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="12" y1="12" x2="12" y2="12.01"></line>
-                                <path d="M3 13a20 20 0 0 0 18 0"></path>
-                            </svg>
-                            Work</a>
-                        </div>
+                            <div class="d-flex">
+                                <a href="#" class="card-btn" data-bs-toggle="modal" data-bs-target="#modal-account-details"><!-- Download SVG icon from http://tabler-icons.io/i/mail -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                </svg>
+                                Account</a>
+                                <a href="#" class="card-btn" data-bs-toggle="modal" data-bs-target="#modal-edit-account"><!-- Download SVG icon from http://tabler-icons.io/i/phone -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+                                    <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"></path>
+                                    <line x1="12" y1="12" x2="12" y2="12.01"></line>
+                                    <path d="M3 13a20 20 0 0 0 18 0"></path>
+                                </svg>
+                                Work</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <?php
+                    if (isset($_GET['error'])) {
+                        $error = $_GET['error'];
+                        
+                        if (!empty($error)) {
+                            $errorMsg = "";
+
+                            switch ($error) {
+                                case 'genericInternalError':
+                                    $errorMsg = "We are sorry but your request could not be handled. Please try again. If the problem persists, contact your system administrator.";
+                                    break;
+                                case 'wrongDataInputFormat':
+                                    $errorMsg = "Please make sure you have completed all fields correctly.";
+                                    break;
+                            }
+
+                            echo '<div class="text-danger">' . $errorMsg . '</div>';
+                        }
+                    }
+                ?>
             </div>
             <footer class="footer footer-transparent d-print-none">
                 <div class="container-xl">
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item"><a href="./docs/index.html"
-                                        class="link-secondary">Documentation</a></li>
-                                <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a>
-                                </li>
-                                <li class="list-inline-item"><a href="https://github.com/PCTO-2122" target="_blank"
-                                        class="link-secondary" rel="noopener">Source code</a></li>
+                                <li class="list-inline-item">v1.0.0</li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
@@ -195,11 +211,6 @@
                                     Copyright &copy; 2022
                                     <a href="." class="link-secondary">ipDigital</a>.
                                     All rights reserved.
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                        v1.0.0
-                                    </a>
                                 </li>
                             </ul>
                         </div>

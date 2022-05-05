@@ -19,9 +19,10 @@
         if ($response["success"]) {
             header("Location: ../tickets.php");
         } else {
-            echo 'Errore, non è stato possibile assegnare una risposta al ticket';
+            // API request faild
+            header("Location: ../tickets.php?error=genericInternalError");
         }
     } else {
-        echo "Inserimento dati non corretto";
+        header("Location: ../tickets.php?error=wrongDataInputFormat");
     }
 ?>

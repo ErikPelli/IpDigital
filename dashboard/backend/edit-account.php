@@ -16,9 +16,10 @@
         if ($response["success"]) {
             header("Location: ../account.php");
         } else {
-            echo 'Errore, non è stato possibile modificare i dati dell\'account';
+            // API request faild
+            header("Location: ../account.php?error=genericInternalError");
         }
     } else {
-        echo "Inserimento dati non corretto";
+        header("Location: ../account.php?error=wrongDataInputFormat");
     }
 ?>

@@ -149,7 +149,8 @@
                             <div class="card-body">
                                 <div class="card-title">Info about #<?= $_GET['vatNum'] . '-' . $_GET['nonComplianceCode'] ?></div>
                                 <?php
-                                    $ticketDetails = getTicket($_GET['vatNum'], $_GET['nonComplianceCode'])["result"];
+                                    $ticket = getTicket($_GET['vatNum'], $_GET['nonComplianceCode']);
+                                    $ticketDetails = $ticket["result"];
                                 ?>
                                 <div class="mb-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-description" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -159,7 +160,7 @@
                                         <path d="M9 17h6"></path>
                                         <path d="M9 13h6"></path>
                                     </svg>
-                                    Description: <strong><?= $ticketDetails["description"] ?></strong>
+                                    Description: <strong><?= $ticketDetails["problemDescription"] ?></strong>
                                 </div>
                                 <div class="mb-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-skyscraper" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -214,6 +215,22 @@
                                     </svg>
                                     Status: <strong><?= $ticketDetails["status"] ?></strong>
                                 </div>
+                                <?php 
+                                    $ticketAnswer = getTicketAnswer($ticket);
+                                    if ($ticketAnswer !== "No Answer") {
+                                        echo '
+                                            <div class="mb-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message-report" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path>
+                                                    <line x1="12" y1="8" x2="12" y2="11"></line>
+                                                    <line x1="12" y1="14" x2="12" y2="14.01"></line>
+                                                </svg>
+                                                Answer: <strong>' . $ticketAnswer . '</strong>
+                                            </div>
+                                        ';
+                                    }
+                                ?>
                             </div>
                             <div class="card-footer">
                                 <?php
@@ -234,29 +251,15 @@
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item">
-                                    <a href="./docs/index.html" class="link-secondary">Documentation</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./license.html" class="link-secondary">License</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="https://github.com/PCTO-2122" target="_blank" class="link-secondary"
-                                        rel="noopener">Source code</a>
-                                </li>
+                                <li class="list-inline-item">v1.0.0</li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
                                     Copyright &copy; 2022
-                                    <a href="." class="link-secondary">ipDigital</a>. All rights
-                                    reserved.
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                        v1.0.0
-                                    </a>
+                                    <a href="." class="link-secondary">ipDigital</a>.
+                                    All rights reserved.
                                 </li>
                             </ul>
                         </div>

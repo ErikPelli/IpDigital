@@ -16,9 +16,11 @@
         if ($response["success"]) {
             header("Location: ../non-compliances.php");
         } else {
-            echo 'Errore, non è stato possibile modificare lo stato della non conformità';
+            // echo 'Errore, non è stato possibile modificare lo stato della non conformità';
+            // API request faild
+            header("Location: ../non-compliances.php?error=genericInternalError");
         }
     } else {
-        echo "Inserimento dati non corretto";
+        header("Location: ../non-compliances.php?error=wrongDataInputFormat");
     }
 ?>

@@ -63,6 +63,32 @@
                                     tabindex="-1">terms and policy</a>.</span>
                         </label>
                     </div>
+
+                    <?php
+                        if (isset($_GET['error'])) {
+                            $error = $_GET['error'];
+                            $errorMsg = "";
+                            
+                            if (!empty($error)) {
+                                switch ($error) {
+                                    case 'userAlreadyExist':
+                                        $errorMsg = "Sorry but this user already exixts. Please, try to use a different email address.";
+                                        break;
+                                    case 'genericError':
+                                        $errorMsg = "Sorry but you have occurred in a Generic Error.";
+                                        break;
+                                    case 'genericInternalError':
+                                        $errorMsg = "Sorry but you have occurred in a Generic Internal Error. The problem is not caused by you.";
+                                        break;
+                                    case 'wrongDataInputFormat':
+                                        $errorMsg = "Please make sure you have completed all fields correctly.";
+                                        break;
+                                }
+
+                                echo '<div class="text-danger">' . $errorMsg . '</div>';
+                            }
+                        }
+                    ?>
                     <div class="form-footer">
                         <button type="submit" class="btn btn-primary w-100">Create new account</button>
                     </div>

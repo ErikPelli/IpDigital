@@ -38,13 +38,18 @@
                                 $error = $_GET['error'];
                                 
                                 if (!empty($error)) {
-                                    if ($error === "wrongPassword") {
-                                        echo '
-                                            <div class="mb-3">
-                                                <input type="password" id="password" name="password" class="form-control is-invalid" placeholder="Password" autocomplete="off" required>
-                                                <div class="invalid-feedback">Wrong password</div>
-                                            </div>
-                                        ';
+                                    switch ($error) {
+                                        case 'wrongPassword':
+                                                echo '
+                                                    <div class="mb-3">
+                                                        <input type="password" id="password" name="password" class="form-control is-invalid" placeholder="Password" autocomplete="off" required>
+                                                        <div class="invalid-feedback">Wrong password</div>
+                                                    </div>
+                                                ';
+                                            break;
+                                        case 'wrongDataInputFormat':
+                                            echo '<div class="text-danger">Please make sure you have completed all fields correctly.</div>';
+                                            break;
                                     }
                                 }
                             } else {
@@ -81,7 +86,7 @@
                 </div>
             </form>
             <div class="text-center text-muted mt-3">
-                Don't have account yet? <a href="./sign-up.html" tabindex="-1">Sign up</a>
+                Don't have account yet? <a href="./sign-up.php" tabindex="-1">Sign up</a>
             </div>
         </div>
     </div>

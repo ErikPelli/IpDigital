@@ -305,9 +305,15 @@
                             </div>
                             <div class="card-footer">
                                 <?php
-                                    if ($ncStatus != "Closed") {
+                                    if (($ncStatus !== "Review") && ($ncStatus !== "Closed")) {
                                         echo '
-                                            <a href="#" class="btn btn-warning d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-danger">Update Status</a>
+                                            <a href="#" class="btn btn-warning d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-update-status">Update Status</a>
+                                        ';
+                                    }
+
+                                    if ($ncStatus === "Review") {
+                                        echo '
+                                            <a href="#" class="btn btn-danger d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-close-non-compliance">Close</a>
                                         ';
                                     }
 
@@ -327,35 +333,50 @@
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item">
-                                    <a href="./docs/index.html" class="link-secondary">Documentation</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./license.html" class="link-secondary">License</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="https://github.com/PCTO-2122" target="_blank" class="link-secondary"
-                                        rel="noopener">Source code</a>
-                                </li>
+                                <li class="list-inline-item">v1.0.0</li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
                                     Copyright &copy; 2022
-                                    <a href="." class="link-secondary">ipDigital</a>. All rights
-                                    reserved.
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                        v1.0.0
-                                    </a>
+                                    <a href="." class="link-secondary">ipDigital</a>.
+                                    All rights reserved.
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </footer>
+        </div>
+    </div>
+
+    <!-- Close non compliance modal -->
+    <div class="modal modal-blur fade" id="modal-close-non-compliance" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <form action="./backend/close-non-compliance.php" method="get">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Close Non Compliance</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="nonCompliance" name="nonCompliance" value="<?= $_GET['id'] ?>">
+                        <div class="col-lg-12">
+                            <div>
+                                <label class="form-label">Result comment</label>
+                                <textarea class="form-control" id="resultComment" name="resultComment" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-danger ms-auto" data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -376,11 +397,12 @@
                                     $managers = getUsers();
 
                                     foreach($managers["result"] as $manager) {
-                                        echo '<option value=' . $manager["email"] . '>' . $manager["email"] . '</option>';
+                                        echo '<option value=' . getUserData($manager["email"])["result"]["fiscalCode"] . '>' . $manager["email"] . '</option>';
                                     }
                                 ?>
                             </select>
                         </div>
+                        <input type="hidden" id="nonCompliance" name="nonCompliance" value="<?= $_GET['id'] ?>">
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
@@ -394,7 +416,7 @@
     </div>
 
     <!-- Update status confirm -->
-    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-blur fade" id="modal-update-status" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
             <form action="./backend/update-non-compliance-status.php" method="get">
