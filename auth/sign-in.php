@@ -29,9 +29,6 @@
                     <div class="mb-2">
                         <label class="form-label">
                             Password
-                            <span class="form-label-description">
-                                <a href="./forgot-password.html">I forgot password</a>
-                            </span>
                         </label>
                         <?php
                             if (isset($_GET['error'])) {
