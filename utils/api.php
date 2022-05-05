@@ -55,10 +55,11 @@
     }
 
 
-    function getNonCompliances($resultsPerPage, $pageNumber) {
+    function getNonCompliances($resultsPerPage, $pageNumber, $search) {
         $jsonData = array(
             'resultsPerPage' => $resultsPerPage,
-            'pageNumber' => $pageNumber
+            'pageNumber' => $pageNumber,
+            'search' => $search
         );
         return apiRequest('GET', 'noncompliances', $jsonData);
     }

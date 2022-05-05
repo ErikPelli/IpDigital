@@ -3,7 +3,7 @@
     $ammessi = "abcdefghijklmnopqrstuvwxyz";
     $ammessi .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $ammessi .= "0123456789";
-    $ammessi .= "@.";
+    $ammessi .= "@. ";
     $vietate = array("select", "insert", "update", "delete", "drop", "alter", "––", "'");
 
     // API

@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['email'])) {
-        header("Location: ../auth/sign-in.html");
+        header("Location: ../auth/sign-in.php");
     }
 
     require_once '../utils/api.php';
@@ -147,7 +147,7 @@
                         <div class="col-12">
                             <div class="row row-cards">
                                 <?php
-                                    $nonCompliancesAnalytics = getNonCompliancesAnalytics();
+                                    $nonCompliancesAnalytics = getNonCompliancesAnalytics()["result"];
                                 ?>
                                 <div class="col-sm-6 col-lg-3">
                                     <div class="card card-sm">
@@ -169,10 +169,10 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        <?= $nonCompliancesAnalytics["result"]["totalNonCompliances"]["new"] ?> New
+                                                        <?= $nonCompliancesAnalytics["totalNonCompliances"]["new"] ?> New
                                                     </div>
                                                     <div class="text-muted">
-                                                        12 today
+                                                        <?= $nonCompliancesAnalytics["days"][0]["new"] ?> today
                                                     </div>
                                                 </div>
                                             </div>
@@ -199,10 +199,10 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        <?= $nonCompliancesAnalytics["result"]["totalNonCompliances"]["progress"] ?> In progress
+                                                        <?= $nonCompliancesAnalytics["totalNonCompliances"]["progress"] ?> In progress
                                                     </div>
                                                     <div class="text-muted">
-                                                        32 today
+                                                        <?= $nonCompliancesAnalytics["days"][0]["progress"] ?> today
                                                     </div>
                                                 </div>
                                             </div>
@@ -229,10 +229,10 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        <?= $nonCompliancesAnalytics["result"]["totalNonCompliances"]["review"] ?> Review
+                                                        <?= $nonCompliancesAnalytics["totalNonCompliances"]["review"] ?> Review
                                                     </div>
                                                     <div class="text-muted">
-                                                        16 today
+                                                        <?= $nonCompliancesAnalytics["days"][0]["review"] ?> today
                                                     </div>
                                                 </div>
                                             </div>
@@ -259,10 +259,10 @@
                                                 </div>
                                                 <div class="col">
                                                     <div class="font-weight-medium">
-                                                        <?= $nonCompliancesAnalytics["result"]["totalNonCompliances"]["closed"] ?> Closed
+                                                        <?= $nonCompliancesAnalytics["totalNonCompliances"]["closed"] ?> Closed
                                                     </div>
                                                     <div class="text-muted">
-                                                        21 today
+                                                        <?= $nonCompliancesAnalytics["days"][0]["closed"] ?> today
                                                     </div>
                                                 </div>
                                             </div>
@@ -279,6 +279,9 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="card">
+                                        <?php
+                                            $ticketsAnalytics = getTicketsAnalytics()["result"];
+                                        ?>
                                         <div class="card-header border-0">
                                             <div class="card-title">Ticket activity</div>
                                         </div>
@@ -290,7 +293,7 @@
                                                             id="sparkline-activity"></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div>Ticket: <?= getTicketsAnalytics()["result"]["totalTickets"] ?></div>
+                                                        <div>Ticket: <?= $ticketsAnalytics["totalTickets"] ?></div>
                                                         <div class="text-muted">
                                                             <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
                                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -302,7 +305,8 @@
                                                                 <polyline points="3 17 9 11 13 15 21 7" />
                                                                 <polyline points="14 7 21 7 21 14" />
                                                             </svg>
-                                                            +2 more than yesterday
+                                                            <?= $ticketsAnalytics["days"][0]["counter"] ?>
+                                                            today
                                                         </div>
                                                     </div>
                                                 </div>
@@ -325,7 +329,7 @@
                                         class="link-secondary">Documentation</a></li>
                                 <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a>
                                 </li>
-                                <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank"
+                                <li class="list-inline-item"><a href="https://github.com/PCTO-2122" target="_blank"
                                         class="link-secondary" rel="noopener">Source code</a></li>
                             </ul>
                         </div>
@@ -417,7 +421,13 @@
                 },
                 series: [{
                     name: "Tickets",
-                    data: [3, 5, 4, 6, 7, 5, 6, 8, 24, 7, 12, 5, 6, 3, 8, 4, 14, 30, 17, 19, 15, 14, 25, 32, 40, 55, 60, 48, 52, 70]
+                    data: [
+                        <?php 
+                            foreach($ticketsAnalytics["days"] as $day) {
+                                echo $day["counter"] . ', ';
+                            }
+                        ?>
+                    ]
                 }],
                 grid: {
                     strokeDashArray: 4,
@@ -440,7 +450,11 @@
                     },
                 },
                 labels: [
-                    '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
+                    <?php 
+                        foreach($ticketsAnalytics["days"] as $day) {
+                            echo "'" . $day["date"] . "', ";
+                        }
+                    ?>
                 ],
                 colors: ["#206bc4"],
                 legend: {
@@ -483,16 +497,40 @@
                 },
                 series: [{
                     name: "Closed",
-                    data: [2, 9, 1, 7, 8, 3, 6, 5, 5, 4, 6, 4, 1, 9, 3, 6, 7, 5, 2, 8, 4, 9, 1, 2, 6, 7, 5, 1, 8, 3, 2, 3, 4, 9, 7, 1, 6]
+                    data: [
+                        <?php
+                            foreach($nonCompliancesAnalytics["days"] as $day) {
+                                echo $day["closed"] . ', ';
+                            }
+                        ?>
+                    ]
                 }, {
                     name: "Review",
-                    data: [2, 9, 1, 7, 8, 3, 6, 5, 5, 4, 6, 4, 1, 9, 3, 6, 7, 5, 2, 8, 4, 9, 1, 2, 6, 7, 5, 1, 8, 3, 2, 3, 4, 9, 7, 1, 6]
+                    data: [
+                        <?php
+                            foreach($nonCompliancesAnalytics["days"] as $day) {
+                                echo $day["review"] . ', ';
+                            }
+                        ?>
+                    ]
                 }, {
                     name: "In progress",
-                    data: [2, 5, 4, 3, 3, 1, 4, 7, 5, 1, 2, 5, 3, 2, 6, 7, 7, 1, 5, 5, 2, 12, 4, 6, 18, 3, 5, 2, 13, 15, 20, 47, 18, 15, 11, 10, 0]
+                    data: [
+                        <?php
+                            foreach($nonCompliancesAnalytics["days"] as $day) {
+                                echo $day["progress"] . ', ';
+                            }
+                        ?>
+                    ]
                 }, {
                     name: "New",
-                    data: [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 12, 5, 8, 22, 6, 8, 6, 4, 1, 8, 24, 29, 51, 40, 47, 23, 26, 50, 26, 41, 22, 46, 47, 81, 46, 6]
+                    data: [
+                        <?php
+                            foreach($nonCompliancesAnalytics["days"] as $day) {
+                                echo $day["new"] . ', ';
+                            }
+                        ?>
+                    ]
                 }],
                 grid: {
                     padding: {
@@ -526,7 +564,11 @@
                     },
                 },
                 labels: [
-                    '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19', '2020-07-20', '2020-07-21', '2020-07-22', '2020-07-23', '2020-07-24', '2020-07-25', '2020-07-26'
+                    <?php 
+                        foreach($nonCompliancesAnalytics["days"] as $day) {
+                            echo "'" . $day["date"] . "', ";
+                        }
+                    ?>
                 ],
                 colors: ["#d63939", "#f59f00", "#2fb344", "#206bc4"],
                 legend: {

@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['email'])) {
-        header("Location: ../auth/sign-in.html");
+        header("Location: ../auth/sign-in.php");
     }
 
     require_once '../utils/api.php';
@@ -185,7 +185,7 @@
                                         class="link-secondary">Documentation</a></li>
                                 <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a>
                                 </li>
-                                <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank"
+                                <li class="list-inline-item"><a href="https://github.com/PCTO-2122" target="_blank"
                                         class="link-secondary" rel="noopener">Source code</a></li>
                             </ul>
                         </div>
@@ -243,7 +243,7 @@
                             <div class="row g-2">
                                 <div class="col">
                                     <input type="text" class="form-control" id="job" name="job"
-                                        placeholder="Email" value="<?php echo $_SESSION['email']; ?>" disabled>
+                                        placeholder="Email" value="<?= $_SESSION['email'] ?>" disabled>
                                 </div>
                                 <div class="col-auto align-self-center">
                                     <span class="form-help" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="<p>If you want to change your email address please contact a System Administrator</p>
@@ -276,17 +276,17 @@
                         <div class="mb-3">
                             <label class="form-label">Job</label>
                             <input type="text" class="form-control" id="job" name="job"
-                                placeholder="Job name" value="<?php echo $settings_data["result"]["job"]; ?>" />
+                                placeholder="Job name" value="<?= $settings_data["result"]["job"] ?>" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Role</label>
                             <input type="text" class="form-control" id="role" name="role"
-                                placeholder="Role name" value="<?php echo $settings_data["result"]["role"]; ?>" />
+                                placeholder="Role name" value="<?= $settings_data["result"]["role"] ?>" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Company</label>
                             <input type="text" class="form-control" id="company" name="company"
-                                placeholder="Company VAT number" value="<?php echo $settings_data["result"]["company"]; ?>" disabled />
+                                placeholder="Company VAT number" value="<?= $settings_data["result"]["company"] ?>" disabled />
                         </div>
                     </div>
                     <div class="modal-footer">

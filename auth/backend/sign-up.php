@@ -1,34 +1,59 @@
 <?php
     require_once '../../utils/api.php';
 
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $fiscalcode = $_POST['fiscalcode'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
     if (
-        (checkChar($firstname) && checkCharDb($firstname)) 
+        isset($_POST['firstname'])
         &&
-        (checkChar($lastname) && checkCharDb($lastname))
+        isset($_POST['lastname'])
         &&
-        (checkChar($fiscalcode) && checkCharDb($fiscalcode))
+        isset($_POST['fiscalcode'])
         &&
-        (checkChar($email) && checkCharDb($email))
+        isset($_POST['email'])
         &&
-        (checkChar($password) && checkCharDb($password))
+        isset($_POST['password'])
     ) {
-        $response signUp($fiscalcode, $firstname , $lastname, $email, $password);
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $fiscalcode = $_POST['fiscalcode'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-        if ($response["success"]) {
-            session_start();
-            $_SESSION['email'] = $email;
-
-            header("Location: ../../dashboard/index.php");
-        } else {
-            echo 'Errore nella registrazione dell\'utente';
+        if (
+            !empty($firstname)
+            &&
+            !empty($lastname)
+            &&
+            !empty($fiscalcode)
+            &&
+            !empty($email)
+            &&
+            !empty($password)
+        ) {
+            if (
+                (checkChar($firstname) && checkCharDb($firstname)) 
+                &&
+                (checkChar($lastname) && checkCharDb($lastname))
+                &&
+                (checkChar($fiscalcode) && checkCharDb($fiscalcode))
+                &&
+                (checkChar($email) && checkCharDb($email))
+                &&
+                (checkChar($password) && checkCharDb($password))
+            ) {
+                $response = signUp($fiscalcode, $firstname , $lastname, $email, $password);
+    
+                if ($response["success"]) {
+                    session_start();
+                    $_SESSION['email'] = $email;
+    
+                    header("Location: ../../dashboard/index.php");
+                } else {
+                    // API request faild
+                    echo 'Errore nella registrazione dell\'utente';
+                }
+            } else {
+                echo "Inserimento dati non corretto";
+            }
         }
-    } else {
-        echo "Inserimento dati non corretto";
     }
 ?>

@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['email'])) {
-        header("Location: ../auth/sign-in.html");
+        header("Location: ../auth/sign-in.php");
     }
 
     require_once '../utils/api.php';
@@ -241,7 +241,7 @@
                                     <a href="./license.html" class="link-secondary">License</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary"
+                                    <a href="https://github.com/PCTO-2122" target="_blank" class="link-secondary"
                                         rel="noopener">Source code</a>
                                 </li>
                             </ul>

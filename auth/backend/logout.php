@@ -6,5 +6,5 @@
 
     echo "Successful disconnection, goodbye!";
 
-    header("Location: ../sign-in.html");
+    header("Location: ../sign-in.php");
 ?>

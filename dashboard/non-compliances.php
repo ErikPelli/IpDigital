@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['email'])) {
-        header("Location: ../auth/sign-in.html");
+        header("Location: ../auth/sign-in.php");
     }
 
     require_once '../utils/api.php';
@@ -142,6 +142,16 @@
                         <!-- Page title actions -->
                         <div class="col-12 col-md-auto ms-auto d-print-none">
                             <div class="btn-list">
+                                <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
+                                    <div class="input-icon">
+                                        <span class="input-icon-addon">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="15" y2="15" /></svg>
+                                        </span>
+                                        <input type="text" id="search" name="search" value="" class="form-control text-black" placeholder="Search…" aria-label="Search in website">
+                                    </div>
+                                </form>
+
                                 <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
                                     data-bs-target="#modal-new-non-compliance">
                                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
@@ -187,7 +197,12 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $nonCompliances = getNonCompliances(10, 1);
+                                        $search = '';
+                                        if (isset($_GET['search'])) {
+                                            $search = $_GET['search'];
+                                        }
+
+                                        $nonCompliances = getNonCompliances(10, 1, $search);
                                         $nonCompliancesType = getNonComplianceTypes();
 
                                         foreach($nonCompliances["result"] as $ncList) {
@@ -251,7 +266,7 @@
                                     <a href="./license.html" class="link-secondary">License</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary"
+                                    <a href="https://github.com/PCTO-2122" target="_blank" class="link-secondary"
                                         rel="noopener">Source code</a>
                                 </li>
                             </ul>
