@@ -20,7 +20,7 @@
         $response = addNonCompliance($origin, $lot, $type, $details);
 
         if ($response["success"]) {
-            header("Location: ../non-compliance.php");
+            header("Location: ../non-compliances.php");
         } else {
             echo 'Errore, non è stato possibile aggiungere la non conformità';
         }

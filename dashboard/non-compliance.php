@@ -15,17 +15,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Non compliance - ipDigital</title>
+    <title>Non compliance details - ipDigital</title>
 
     <!-- TABLER (https://github.com/tabler/tabler) -->
-    <script src="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/js/tabler.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler.min.css" />
-
-    <!-- PLUGINS -->
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-flags.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-payments.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-vendors.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler.min.css">
 </head>
 
 <body>
@@ -46,7 +39,7 @@
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                             aria-label="Open user menu">
                             <span class="avatar avatar-sm"
-                                style="background-image: url(../static/avatars/000m.jpg)"></span>
+                                style="background-image: url(../static/avatars/000m.png)"></span>
                             <div class="d-none d-xl-block ps-2">
                                 <?php
                                     $user_data = getUserData($_SESSION['email']);
@@ -87,7 +80,7 @@
                                 </a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="./non-compliance.php">
+                                <a class="nav-link" href="./non-compliances.php">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/archive -->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +99,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./form-elements.html">
+                                <a class="nav-link" href="./tickets.php">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/ticket -->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -143,100 +136,188 @@
                                 Overview
                             </div>
                             <h2 class="page-title">
-                                Non compliance
+                                Non compliance details
                             </h2>
-                        </div>
-                        <!-- Page title actions -->
-                        <div class="col-12 col-md-auto ms-auto d-print-none">
-                            <div class="btn-list">
-                                <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal"
-                                    data-bs-target="#modal-new-non-compliance">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <line x1="12" y1="5" x2="12" y2="19" />
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                    </svg>
-                                    Add new
-                                </a>
-                                <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-new-non-compliance" aria-label="Create new report">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <line x1="12" y1="5" x2="12" y2="19" />
-                                        <line x1="5" y1="12" x2="19" y2="12" />
-                                    </svg>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="page-body">
                 <div class="container-xl">
-                    <div class="card">
-                        <div class="table-responsive">
-                            <table class="table table-vcenter card-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Manager</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th class="w-1"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                        $nonCompliances = getNonCompliances(10, 1);
-                                        $nonCompliancesType = getNonComplianceTypes();
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">Info about #<?php echo $_GET['id']; ?></div>
+                                <?php
+                                    $ncDetails = getNonComplianceDetails($_GET['id']);
+                                    $ncTypeDetails = getNonComplianceTypeDetails($ncDetails);
+                                    $ncStatus = getNonComplianceStatus($ncDetails);
+                                    $ncManager = getNonComplianceManager($ncDetails);
+                                ?>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <rect x="3" y="4" width="18" height="16" rx="3"></rect>
+                                        <circle cx="9" cy="10" r="2"></circle>
+                                        <line x1="15" y1="8" x2="17" y2="8"></line>
+                                        <line x1="15" y1="12" x2="17" y2="12"></line>
+                                        <line x1="7" y1="16" x2="17" y2="16"></line>
+                                    </svg>
+                                    Name: <strong><?= $ncTypeDetails["name"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-description" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                                        <path d="M9 17h6"></path>
+                                        <path d="M9 13h6"></path>
+                                    </svg>
+                                    Description: <strong><?= $ncTypeDetails["description"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-details" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
+                                        <path d="M12 3v16"></path>
+                                    </svg>
+                                    Details: <strong><?= $ncDetails["result"]["comment"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                                    </svg>
+                                    Manager: <strong><?= $ncManager ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <circle cx="12" cy="11" r="3"></circle>
+                                        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+                                    </svg>
+                                    Origin: <strong><?= $ncDetails["result"]["origin"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notes" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <rect x="5" y="3" width="14" height="18" rx="2" />
+                                        <line x1="9" y1="7" x2="15" y2="7" />
+                                        <line x1="9" y1="11" x2="15" y2="11" />
+                                        <line x1="9" y1="15" x2="13" y2="15" />
+                                    </svg>
+                                    Type: <strong><?= $ncDetails["result"]["nonComplianceType"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-package" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
+                                        <line x1="12" y1="12" x2="20" y2="7.5"></line>
+                                        <line x1="12" y1="12" x2="12" y2="21"></line>
+                                        <line x1="12" y1="12" x2="4" y2="7.5"></line>
+                                        <line x1="16" y1="5.25" x2="8" y2="9.75"></line>
+                                    </svg>
+                                    Lot: <strong><?= $ncDetails["result"]["shippingLot"] ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-report-analytics" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                                        <rect x="9" y="3" width="6" height="4" rx="2"></rect>
+                                        <path d="M9 17v-5"></path>
+                                        <path d="M12 17v-1"></path>
+                                        <path d="M15 17v-3"></path>
+                                    </svg>
+                                    Status: <strong><?= $ncStatus ?></strong>
+                                </div>
+                                <div class="mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <rect x="4" y="5" width="16" height="16" rx="2"></rect>
+                                        <line x1="16" y1="3" x2="16" y2="7"></line>
+                                        <line x1="8" y1="3" x2="8" y2="7"></line>
+                                        <line x1="4" y1="11" x2="20" y2="11"></line>
+                                        <line x1="10" y1="16" x2="14" y2="16"></line>
+                                        <line x1="12" y1="14" x2="12" y2="18"></line>
+                                    </svg>
+                                    Creation date: <strong><?= $ncDetails["result"]["nonComplianceDate"] ?></strong>
+                                </div>
+                                <?php
+                                    if ($ncStatus === "Closed") {
+                                        echo '
+                                            <div class="mb-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"></path>
+                                                    <circle cx="18" cy="18" r="4"></circle>
+                                                    <path d="M15 3v4"></path>
+                                                    <path d="M7 3v4"></path>
+                                                    <path d="M3 11h16"></path>
+                                                    <path d="M18 16.496v1.504l1 1"></path>
+                                                </svg>
+                                                Analysis end date: <strong>' . $ncDetails["result"]["analysisEndDate"] . '</strong>
+                                            </div>
+                                            <div class="mb-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-off" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M19.823 19.824a2 2 0 0 1 -1.823 1.176h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 1.175 -1.823m3.825 -.177h9a2 2 0 0 1 2 2v9"></path>
+                                                    <line x1="16" y1="3" x2="16" y2="7"></line>
+                                                    <line x1="8" y1="3" x2="8" y2="4"></line>
+                                                    <path d="M4 11h7m4 0h5"></path>
+                                                    <line x1="11" y1="15" x2="12" y2="15"></line>
+                                                    <line x1="12" y1="15" x2="12" y2="18"></line>
+                                                    <line x1="3" y1="3" x2="21" y2="21"></line>
+                                                </svg>
+                                                Check end date: <strong>' . $ncDetails["result"]["checkEndDate"] . '</strong>
+                                            </div>
+                                            <div class="mb-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-report" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path>
+                                                    <path d="M18 14v4h4"></path>
+                                                    <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path>
+                                                    <rect x="8" y="3" width="6" height="4" rx="2"></rect>
+                                                    <circle cx="18" cy="18" r="4"></circle>
+                                                    <path d="M8 11h4"></path>
+                                                    <path d="M8 15h3"></path>
+                                                </svg>
+                                                Result: <strong>' . $ncDetails["result"]["result"] . '</strong>
+                                            </div>
+                                        ';
+                                    } elseif ($ncStatus === "Review") {
+                                        echo '
+                                            <div class="mb-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"></path>
+                                                    <circle cx="18" cy="18" r="4"></circle>
+                                                    <path d="M15 3v4"></path>
+                                                    <path d="M7 3v4"></path>
+                                                    <path d="M3 11h16"></path>
+                                                    <path d="M18 16.496v1.504l1 1"></path>
+                                                </svg>
+                                                Analysis end date: <strong>' . $ncDetails["result"]["analysisEndDate"] . '</strong>
+                                            </div>
+                                        ';
+                                    }
+                                ?>
+                            </div>
+                            <div class="card-footer">
+                                <?php
+                                    if ($ncStatus != "Closed") {
+                                        echo '
+                                            <a href="#" class="btn btn-warning d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-danger">Update Status</a>
+                                        ';
+                                    }
 
-                                        foreach($nonCompliances["result"] as $ncList) {
-                                            $nc = getNonComplianceDetails($ncList["nonComplianceCode"]);
-                                            
-                                            $ncID = "";
-                                            switch ($nc["result"]["origin"]) {
-                                                case "internal":
-                                                    $ncID = "I-" . $ncList["nonComplianceCode"];
-                                                    break;
-                                                case "customer":
-                                                    $ncID = "C-" . $ncList["nonComplianceCode"];
-                                                    break;
-                                                case "supplier":
-                                                    $ncID = "S-" . $ncList["nonComplianceCode"];
-                                                    break;
-                                                default:
-                                                    $ncID = $ncList["nonComplianceCode"];
-                                            }
-
-                                            $ncTypeDetails = getNonComplianceTypeDetails($nc);
-                                            $manager = getNonComplianceManager($nc);
-                                            $ncStatus = getNonComplianceStatus($nc);
-
-                                            echo '
-                                                <tr>
-                                                    <td class="text-muted">' . $ncID . '</td>
-                                                    <td>' . $ncTypeDetails["name"] . '</td>
-                                                    <td class="text-muted">
-                                                        <a href="#" class="text-reset">' . $manager . '</a>
-                                                    </td>
-                                                    <td class="text-muted">' . $nc["result"]["nonComplianceDate"] . '</td>
-                                                    <td class="text-muted">' . $ncStatus . '</td>
-                                                    <td>
-                                                        <a href="./non-compliance-details.php?id=' . $ncList["nonComplianceCode"] . '">Details</a>
-                                                    </td>
-                                                </tr>
-                                            ';
-                                        }
-                                    ?>
-                                </tbody>
-                            </table>
+                                    if ($ncManager === "Unassigned Manager") {
+                                        echo '
+                                            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-assign-manager">Assign Manager</a>
+                                        ';
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -278,100 +359,27 @@
         </div>
     </div>
 
-
-    <!-- Add new non compliance modal -->
-    <div class="modal modal-blur fade" id="modal-new-non-compliance" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Assign manager modal -->
+    <div class="modal modal-blur fade" id="modal-assign-manager" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form action="./backend/add-non-compliance.php" method="get">
+                <form action="./backend/assign-manager.php" method="get">
                     <div class="modal-header">
-                        <h5 class="modal-title">New non compliance</h5>
+                        <h5 class="modal-title">Assign Non compliance Manager</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <div class="form-label">Type</div>
-                            <select class="form-select" id="type" name="type">
+                            <div class="form-label">Manager</div>
+                            <select class="form-select" id="manager" name="manager">
                                 <?php
-                                    $nonCompliancesType = getNonComplianceTypes();
+                                    $managers = getUsers();
 
-                                    foreach($nonCompliancesType["result"] as $ncTypeCode) {
-                                        echo '<option value=' . $ncTypeCode["code"] . '>' . $ncTypeCode["name"] . '</option>';
+                                    foreach($managers["result"] as $manager) {
+                                        echo '<option value=' . $manager["email"] . '>' . $manager["email"] . '</option>';
                                     }
                                 ?>
                             </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Lot</label>
-                            <select type="text" class="form-select" placeholder="Select a lot" id="lot" name="lot" value="">
-                                <?php
-                                    $lotList = getLots();
-
-                                    foreach($lotList["result"] as $lot) {
-                                        echo '<option value=' . $lot["shippingCode"] . '>' . $lot["shippingCode"] . '</option>';
-                                    }
-                                ?>
-                            </select>
-                        </div>
-
-                        <label class="form-label">Origin</label>
-                        <div class="form-selectgroup-boxes row mb-3">
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="internal" class="form-selectgroup-input"
-                                        checked />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Internal</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="customer" class="form-selectgroup-input" />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Customer</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                            <div class="col-lg-4">
-                                <label class="form-selectgroup-item">
-                                    <input type="radio" id="nc-origin" name="nc-origin" value="supplier" class="form-selectgroup-input" />
-                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                        <span class="me-3">
-                                            <span class="form-selectgroup-check"></span>
-                                        </span>
-                                        <span class="form-selectgroup-label-content">
-                                            <span class="form-selectgroup-title strong mb-1">Supplier</span>
-                                            <span class="d-block text-muted">Insert charts and additional advanced
-                                                analyses to
-                                                be inserted in the report</span>
-                                        </span>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div>
-                                <label class="form-label">Additional information</label>
-                                <textarea class="form-control" id="details" name="details" rows="3"></textarea>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -384,6 +392,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Update status confirm -->
+    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="./backend/update-non-compliance-status.php" method="get">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-body text-center py-4">
+                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9v2m0 4v.01" /><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" /></svg>
+                    <h3>Are you sure?</h3>
+                    <div class="text-muted">Do you really want to update the non compliance status from <?php echo $ncStatus . ' to ' . getNextNonComplianceStatus($ncStatus); ?>.</div>
+                    <input type="hidden" id="noncompliance" name="noncompliance" value="<?php echo $_GET['id']; ?>">
+                    <input type="hidden" id="status" name="status" value="<?php echo $ncStatus; ?>">
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                    <div class="row">
+                        <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                            Cancel
+                        </a></div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-danger w-100" data-bs-dismiss="modal">Update</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- PLUGINS -->
+    <script src="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-vendors.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </body>
 
 </html>

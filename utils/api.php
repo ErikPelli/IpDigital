@@ -187,4 +187,20 @@
         return apiRequest('POST', 'details', $jsonData);
     }
 
+    function getTickets($resultsPerPage, $pageNumber) {
+        $jsonData = array(
+            'resultsPerPage' => $resultsPerPage,
+            'pageNumber' => $pageNumber
+        );
+        return apiRequest('GET', 'tickets', $jsonData);
+    }
+
+    function getTicket($vat, $nonCompliance) {
+        $jsonData = array(
+            'vat' => $vat,
+            'nonCompliance' => $nonCompliance
+        );
+        return apiRequest('GET', 'ticket', $jsonData);
+    }
+
 ?>

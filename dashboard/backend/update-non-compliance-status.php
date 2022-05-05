@@ -14,7 +14,7 @@
         $response = updateNonComplianceStatus($nonCompliance, $status);
 
         if ($response["success"]) {
-            header("Location: ../non-compliance.php");
+            header("Location: ../non-compliances.php");
         } else {
             echo 'Errore, non è stato possibile modificare lo stato della non conformità';
         }

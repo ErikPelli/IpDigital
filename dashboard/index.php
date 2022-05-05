@@ -18,14 +18,7 @@
     <title>Dashboard - ipDigital</title>
 
     <!-- TABLER (https://github.com/tabler/tabler) -->
-    <script src="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/js/tabler.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler.min.css">
-
-    <!-- PLUGINS -->
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-flags.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-payments.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-vendors.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
 <body>
@@ -45,7 +38,7 @@
                         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                             aria-label="Open user menu">
                             <span class="avatar avatar-sm"
-                                style="background-image: url(../static/avatars/000m.jpg)"></span>
+                                style="background-image: url(../static/avatars/000m.png)"></span>
                             <div class="d-none d-xl-block ps-2">
                                 <?php
                                     $user_data = getUserData($_SESSION['email']);
@@ -86,7 +79,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./non-compliance.php">
+                                <a class="nav-link" href="./non-compliances.php">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/archive -->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +98,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="./form-elements.html">
+                                <a class="nav-link" href="./tickets.php">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/ticket -->
                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -543,6 +536,14 @@
         });
       // @formatter:on
     </script>
+
+
+    <!-- PLUGINS -->
+    <script src="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-flags.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-payments.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/core@1.0.0-beta9/dist/css/tabler-vendors.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </body>
 
 </html>
