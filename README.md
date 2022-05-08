@@ -12,6 +12,8 @@
 
 ## Documents
 
+* Architecture
+  - [Architectural document](/architecture/architectural_document.pdf)
 * Management
   - [WBS](/management/WBS/Diagram.png)
   - [CPM](/management/CPM/Diagram.png)
@@ -23,6 +25,7 @@
   - [Documentation](/database/documentation.pdf)
   - [Business rules](/database/business_rules.md)
   - [SQL](/database/SQL.pdf)
+  - [Devemplment DB Dump](/database/ipdigital_dev_dump.sql)
 
 ## Credits
 
