@@ -18,13 +18,13 @@
   - [GANTT](/management/GANTT/Diagram.png)
   - [Project Management](/management/project_management.pdf)
 * Architecture
-  - [Architectural document](/architecture/architectural_document.pdf)
+  - [Architectural Document](/architecture/architectural_document.pdf)
 * Database
-  - [ER diagram](/database/ER-diagram.png)
-  - [ER diagram logical restructured](/database/ER-diagram-logical-restructured.png)
-  - [Logical diagram](/database/logical-diagram.png)
+  - [ER Diagram](/database/ER-diagram.png)
+  - [Relational ER Diagram](/database/ER-diagram-logical-restructured.png)
+  - [Logical Diagram](/database/logical-diagram.png)
   - [Documentation](/database/documentation.pdf)
-  - [Business rules](/database/business_rules.md)
+  - [Business Rules](/database/business_rules.md)
   - [SQL](/database/SQL.pdf)
   - [Development DB Dump](/database/ipdigital_dev_dump.sql)
 
