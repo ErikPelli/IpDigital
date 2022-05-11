@@ -16,6 +16,7 @@
   - [WBS](/management/WBS/Diagram.png)
   - [CPM](/management/CPM/Diagram.png)
   - [GANTT](/management/GANTT/Diagram.png)
+  - [Project Management](/management/project_management.pdf)
 * Architecture
   - [Architectural document](/architecture/architectural_document.pdf)
 * Database
