@@ -21,12 +21,12 @@ First of all, we dealt with thinking about a business identity that represents a
 This fake company deals with producing and selling USB sticks addressed to the business world and produced in recycled and ecological materials, in order to reduce the environmental impact.
 
 ## Project management
-We defined a project development plan using the knowledge learned from the project management subject faced at school, thus making a complete analysis of times and risks, through the Work Breakdwon Structure, the Critical Path Method and the Gantt diagram.
-We also defined the various business processes that are used to produce and sell USB sticks, through the view of some videos on YouTube and blogs that dealt with this topic specifically.
+We defined a project development plan using the knowledge learned from the project management subject faced at school, thus making a complete analysis of times and risks, through the [Work Breakdwon Structure](https://github.com/PCTO-2122/dashboard-docs/blob/main/management/WBS/Diagram.png), the [Critical Path Method](https://github.com/PCTO-2122/dashboard-docs/blob/main/management/CPM/Diagram.png) and the [Gantt diagram](https://github.com/PCTO-2122/dashboard-docs/blob/main/management/GANTT/Diagram.png).
+We also defined the various [business processes](https://github.com/PCTO-2122/dashboard-docs/blob/main/management/project_management.pdf) that are used to produce and sell USB sticks, through the view of some videos on YouTube and blogs that dealt with this topic specifically.
 
-## Definition
+## [Definition](https://github.com/PCTO-2122/dashboard-docs/blob/main/architecture/architectural_document.pdf)
 We designed the interface of the web application and defined the various features through the requirements that were requested, also trying to ask for more information on what the customer (the professor) wanted and possibly reaching compromises on certain things that are hardly achievable in the established times.
 
 ## Execution
-We made the database starting from the design of an E-R scheme, and reaching its translation into SQL queries to be performed in the DBMS MySQL, thus ensuring their compatibility with the system.
-A web application in PHP and Bootstrap was also created to allow you to interact with data and modify them easily, as required by the project goals.
+We made the [database](https://github.com/PCTO-2122/dashboard-docs/tree/main/database) starting from the design of an E-R scheme, and reaching its translation into SQL queries to be performed in the DBMS MySQL, thus ensuring their compatibility with the system.
+A web application in [PHP](https://github.com/PCTO-2122/dashboard-api) and [Bootstrap](https://github.com/PCTO-2122/dashboard) was also created to allow the user to interact with data and modify them easily, as required by the project goals.
