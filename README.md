@@ -30,3 +30,10 @@ We designed the interface of the web application and defined the various feature
 ## Execution
 We made the [database](https://github.com/PCTO-2122/dashboard-docs/tree/main/database) starting from the design of an E-R scheme, and reaching its translation into SQL queries to be performed in the DBMS MySQL, thus ensuring their compatibility with the system.
 A web application in [PHP](https://github.com/PCTO-2122/dashboard-api) and [Bootstrap](https://github.com/PCTO-2122/dashboard) was also created to allow the user to interact with data and modify them easily, as required by the project goals.
+
+# Architecture
+![Architecture](/images/architecture.png?raw=true)
+
+## Frontend
+Kevin Azemi has mainly dealt with the work of the frontend and design of the interface, creating a clean and minimal graphics, which can be used by anyone.
+![Dashboard](/images/dashboard.png?raw=true)
