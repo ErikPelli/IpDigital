@@ -25,7 +25,7 @@
   - [Documentation](/database/documentation.pdf)
   - [Business rules](/database/business_rules.md)
   - [SQL](/database/SQL.pdf)
-  - [Devemplment DB Dump](/database/ipdigital_dev_dump.sql)
+  - [Development DB Dump](/database/ipdigital_dev_dump.sql)
 
 ## Credits
 
