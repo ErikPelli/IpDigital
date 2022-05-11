@@ -8,7 +8,7 @@ The work takes place within the PCTO 2021/2022 project, which aims to introduce 
 - [Azemi Kevin](https://github.com/Klay4)
 - Cadore Alessio
 - Candian Michele
-- El Ikhbari Ilias
+- [El Ikhbari Ilias](https://github.com/BlackJekko)
 - Falasco Giosuè
 - Rubin Francesca
 
