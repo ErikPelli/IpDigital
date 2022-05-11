@@ -1,0 +1,12 @@
+[submodule "documentation"]
+	path = documentation
+	url = https://github.com/PCTO-2122/dashboard-docs
+[submodule "design"]
+	path = design
+	url = https://github.com/PCTO-2122/dashboard-design
+[submodule "dashboard-api"]
+	path = dashboard-api
+	url = https://github.com/PCTO-2122/dashboard-api
+[submodule "dashboard-frontend"]
+	path = dashboard-frontend
+	url = https://github.com/PCTO-2122/dashboard
