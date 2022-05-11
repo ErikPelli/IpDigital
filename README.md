@@ -12,12 +12,12 @@
 
 ## Documents
 
-* Architecture
-  - [Architectural document](/architecture/architectural_document.pdf)
 * Management
   - [WBS](/management/WBS/Diagram.png)
   - [CPM](/management/CPM/Diagram.png)
   - [GANTT](/management/GANTT/Diagram.png)
+* Architecture
+  - [Architectural document](/architecture/architectural_document.pdf)
 * Database
   - [ER diagram](/database/ER-diagram.png)
   - [ER diagram logical restructured](/database/ER-diagram-logical-restructured.png)
