@@ -44,6 +44,10 @@ A web application in [PHP](https://github.com/PCTO-2122/dashboard-api) and [Boot
   - Freenom domain + Let's Encrypt certificate
   - Cloudflare CDN
 
+## API
+The backend has been split into a part that exposes some REST API and returns a JSON result, after getting the data requested by the caller from the database, and a part that interfaces with the user, manages the sessions and calls the APIs to get the data to show .
+The APIs are therefore exclusively for internal use and there is no authentication for their use, and allows us to further separate the functionalities and make more people work at the same time, without worrying about internal details for the callers.
+
 ## Frontend preview
 ![Dashboard](/images/dashboard.png?raw=true)
 
