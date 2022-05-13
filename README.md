@@ -21,6 +21,7 @@ To make this repo files, we used the following templates/softwares/websites:
 - [Tabler](https://tabler.io/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Postman](https://www.postman.com/)
+- [Nginx](https://nginx.org)
 - [Figma](https://www.figma.com/)
 - [Photoshop](https://www.adobe.com/it/products/photoshop.html)
 
