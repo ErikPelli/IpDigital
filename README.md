@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  <a href="#frontend & backend">Frontend & Backend dashboard</a> •
+  <a href="#frontend & backend">Frontend & Backend</a> •
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
