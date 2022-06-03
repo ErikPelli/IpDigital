@@ -6,6 +6,20 @@
     }
 
     require_once '../utils/api.php';
+
+
+
+    $nonCompliancesAnalytics = getNonCompliancesAnalytics()["result"];
+    $nonCompliancesAnalyticsTotal = $nonCompliancesAnalytics["totalNonCompliances"]["new"] + $nonCompliancesAnalytics["totalNonCompliances"]["progress"] + $nonCompliancesAnalytics["totalNonCompliances"]["review"] + $nonCompliancesAnalytics["totalNonCompliances"]["closed"];
+    $numPages = ceil($nonCompliancesAnalyticsTotal / 10); // cambiare 10 con il GET del number
+
+    if (!isset($_GET['page']) || ($_GET['page'] < 1) || ($_GET['page'] > $numPages)) {
+        header("Location: ./non-compliances.php?page=1&number=10");
+    } else {
+        if (!isset($_GET['number']) || ($_GET['number'] < 1) || ($_GET['number'] > 50)) {
+            header("Location: ./non-compliances.php?page={$_GET['page']}&number=10");
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -202,7 +216,7 @@
                                             $search = $_GET['search'];
                                         }
 
-                                        $nonCompliances = getNonCompliances(10, $_GET['page'], $search);
+                                        $nonCompliances = getNonCompliances($_GET['number'], $_GET['page'], $search);
                                         $nonCompliancesType = getNonComplianceTypes();
 
                                         foreach($nonCompliances["result"] as $ncList) {
@@ -252,17 +266,37 @@
                             </table>
                         </div>
                         <div class="card-footer d-flex align-items-center">
-                            <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
+                            <p class="m-0 text-muted">Showing 
+                                <span>1</span> to 
+                                <span>
+                                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
+                                        <div class="mx-2 d-inline-block">
+                                            <input type="hidden" id="page" name="page" value="<?= $_GET['page']; ?>">
+                                            <input type="text" id="number" name="number" class="form-control form-control-sm" value="<?= $_GET['number']; ?>" size="3" aria-label="Number filter">
+                                        </div>
+                                    </form>
+                                </span> of&nbsp;
+                                <span><?= $nonCompliancesAnalyticsTotal ?></span>&nbsp;entries
+                            </p>
                                 <ul class="pagination m-0 ms-auto">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="./non-compliances.php?page=1" tabindex="-1" aria-disabled="true">
+                                <li class="page-item <?=  ($_GET['page'] <= 1) ? "disabled" : '';  ?>">
+                                    <a class="page-link" href="./non-compliances.php?page=<?= $_GET['page']-1; ?>&number=<?= $_GET['number']; ?>" tabindex="-1" aria-disabled="true">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><desc>Download more icon variants from https://tabler-icons.io/i/chevron-left</desc><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
                                         prev
                                     </a>
                                 </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">
+                                <?php
+                                    for ($i = 1; $i <= $numPages; $i++) {
+                                        if ($i == $_GET['page']) {
+                                            echo "<li class='page-item active'><a class='page-link' href='./non-compliances.php?page={$i}&number={$_GET['number']}'>{$i}</a></li>";
+                                        } else {
+                                            echo "<li class='page-item'><a class='page-link' href='./non-compliances.php?page={$i}&number={$_GET['number']}'>{$i}</a></li>";
+                                        }
+                                    }
+                                ?>
+                                <li class="page-item <?=  ($_GET['page'] >= $numPages) ? "disabled" : '';  ?>">
+                                    <a class="page-link" href="./non-compliances.php?page=<?= $_GET['page']+1; ?>&number=<?= $_GET['number']; ?>">
                                     next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><desc>Download more icon variants from https://tabler-icons.io/i/chevron-right</desc><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>
                                     </a>
