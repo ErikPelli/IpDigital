@@ -305,7 +305,7 @@
                             </div>
                             <div class="card-footer">
                                 <?php
-                                    if (($ncStatus !== "Review") && ($ncStatus !== "Closed")) {
+                                    if (($ncManager !== "Unassigned Manager") && ($ncStatus !== "Review") && ($ncStatus !== "Closed")) {
                                         echo '
                                             <a href="#" class="btn btn-warning d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-update-status">Update Status</a>
                                         ';
