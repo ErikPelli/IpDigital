@@ -1,7 +1,9 @@
 <?php
     // Input Data Check
     $ammessi = "abcdefghijklmnopqrstuvwxyz";
+    $ammessi .= "èéòàùì";
     $ammessi .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $ammessi .= "ÈÀÒÙÌ";
     $ammessi .= "0123456789";
     $ammessi .= "@. ";
     $vietate = array("select", "insert", "update", "delete", "drop", "alter", "––", "'");
