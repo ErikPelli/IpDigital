@@ -45,35 +45,74 @@
             <div class="page-wrapper">
                 <div class="page-body">
                     <div class="container-xl">
-                        <form action="./backend/create-ticket.php" method="get" class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6 col-xl-12">
-                                        <div class="mb-3">
-                                            <label class="form-label required">VAT Number</label>
-                                            <input type="text" class="form-control" name="example-required-input" placeholder="IT788945231">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Shiping Code</label>
-                                            <input type="text" class="form-control" name="example-required-input" placeholder="0258463971">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Non-Compliance Code</label>
-                                            <input type="text" class="form-control" name="example-required-input" placeholder="13">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Description <span class="form-label-description">max 128</span></label>
-                                            <textarea class="form-control" name="example-textarea-input" rows="6" maxlength="128" placeholder="Description.."></textarea>
+                        <div class="card">
+                            <form action="./backend/create-ticket.php" method="get">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-xl-12">
+                                            <div class="mb-3">
+                                                <label class="form-label required">VAT Number</label>
+                                                <input type="text" class="form-control" id="vatNum" name="vatNum" placeholder="IT788945231">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label required">Shiping Code</label>
+                                                <input type="text" class="form-control" id="shippingCode" name="shippingCode" placeholder="0258463971">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label required">Non-Compliance Code</label>
+                                                <input type="text" class="form-control" id="ncCode" name="ncCode" placeholder="13">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Description <span class="form-label-description">max 128</span></label>
+                                                <textarea class="form-control" id="description" name="description" rows="6" maxlength="128" placeholder="Description.."></textarea>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <?php
+                                        if (isset($_GET['error'])) {
+                                            $error = $_GET['error'];
+                                            
+                                            if (!empty($error)) {
+                                                $errorMsg = "";
+
+                                                switch ($error) {
+                                                    case 'genericInternalError':
+                                                        $errorMsg = "We are sorry but your request could not be handled. Please try again. If the problem persists, contact your system administrator.";
+                                                        break;
+                                                    case 'wrongDataInputFormat':
+                                                        $errorMsg = "Please make sure you have completed all fields correctly.";
+                                                        break;
+                                                }
+
+                                                echo '<div class="text-danger">' . $errorMsg . '</div>';
+                                            }
+                                        }
+                                        
+                                        if (isset($_GET['success'])) {
+                                            $success = $_GET['success'];
+                                            
+                                            if (!empty($success)) {
+                                                $successMsg = "";
+
+                                                switch ($success) {
+                                                    case 'ticketCreated':
+                                                        $successMsg = "Ticket submitted.";
+                                                        break;
+                                                }
+
+                                                echo '<div class="text-success">' . $successMsg . '</div>';
+                                            }
+                                        }
+                                    ?>
                                 </div>
-                            </div>
-                            <div class="card-footer text-end">
-                                <div class="d-flex">
-                                    <button type="submit" class="btn btn-primary ms-auto">Send data</button>
+                                <div class="card-footer text-end">
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary ms-auto">Send data</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <footer class="footer footer-transparent d-print-none">

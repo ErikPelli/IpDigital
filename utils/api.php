@@ -206,6 +206,20 @@
         return apiRequest('POST', 'details', $jsonData);
     }
 
+    function addTicket($vatNum, $shippingCode, $ncCode, $description = "") {
+        $jsonData = array(
+            'vat' => $vatNum,
+            'nonCompliance' => $ncCode,
+            'shippingLot' => $shippingCode
+        );
+
+        if($description != "") {
+            $jsonData['description'] = $description;
+        }
+
+        return apiRequest('PUT', 'ticket', $jsonData);
+    }
+
     function getTickets($resultsPerPage, $pageNumber) {
         $jsonData = array(
             'resultsPerPage' => $resultsPerPage,
