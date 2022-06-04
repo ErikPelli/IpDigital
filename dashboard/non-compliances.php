@@ -11,7 +11,7 @@
 
     $nonCompliancesAnalytics = getNonCompliancesAnalytics()["result"];
     $nonCompliancesAnalyticsTotal = $nonCompliancesAnalytics["totalNonCompliances"]["new"] + $nonCompliancesAnalytics["totalNonCompliances"]["progress"] + $nonCompliancesAnalytics["totalNonCompliances"]["review"] + $nonCompliancesAnalytics["totalNonCompliances"]["closed"];
-    $numPages = ceil($nonCompliancesAnalyticsTotal / 10); // cambiare 10 con il GET del number
+    $numPages = ceil($nonCompliancesAnalyticsTotal / 10);
 
     if (!isset($_GET['page']) || ($_GET['page'] < 1) || ($_GET['page'] > $numPages)) {
         header("Location: ./non-compliances.php?page=1&number=10");
@@ -20,6 +20,8 @@
             header("Location: ./non-compliances.php?page={$_GET['page']}&number=10");
         }
     }
+
+    $numPages = ceil($nonCompliancesAnalyticsTotal / $_GET['number']);
 ?>
 
 <!DOCTYPE html>
@@ -267,7 +269,6 @@
                         </div>
                         <div class="card-footer d-flex align-items-center">
                             <p class="m-0 text-muted">Showing 
-                                <span>1</span> to 
                                 <span>
                                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get">
                                         <div class="mx-2 d-inline-block">
