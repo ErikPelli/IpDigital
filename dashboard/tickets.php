@@ -166,7 +166,7 @@
                                         <line x1="10" y1="14" x2="20" y2="4"></line>
                                         <polyline points="15 4 20 4 20 9"></polyline>
                                     </svg>
-                                    Add new
+                                    Create new
                                 </a>
                             </div>
                         </div>
