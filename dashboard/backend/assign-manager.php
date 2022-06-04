@@ -14,7 +14,7 @@
         $response = updateNonComplianceManager($nonCompliance, $manager);
 
         if ($response["success"]) {
-            header("Location: ../non-compliances.php");
+            header("Location: ../non-compliance.php?id={$nonCompliance}");
         } else {
             // API request faild
             header("Location: ../non-compliances.php?error=genericInternalError");
