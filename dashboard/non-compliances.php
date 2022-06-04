@@ -272,23 +272,25 @@
                             </p>
                                 <ul class="pagination m-0 ms-auto">
                                 <li class="page-item <?=  ($_GET['page'] <= 1) ? "disabled" : '';  ?>">
-                                    <a class="page-link" href="./non-compliances.php?page=<?= $_GET['page']-1; ?>&number=<?= $_GET['number']; ?>" tabindex="-1" aria-disabled="true">
+                                    <a class="page-link" href="./non-compliances.php?page=<?= $_GET['page']-1; ?>&number=<?= $_GET['number']; ?><?php if (isset($_GET['search'])) echo '&search=' . $_GET['search']; ?>" tabindex="-1" aria-disabled="true">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><desc>Download more icon variants from https://tabler-icons.io/i/chevron-left</desc><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
                                         prev
                                     </a>
                                 </li>
                                 <?php
-                                    for ($i = 1; $i <= $numPages; $i++) {
-                                        if ($i == $_GET['page']) {
-                                            echo "<li class='page-item active'><a class='page-link' href='./non-compliances.php?page={$i}&number={$_GET['number']}'>{$i}</a></li>";
-                                        } else {
-                                            echo "<li class='page-item'><a class='page-link' href='./non-compliances.php?page={$i}&number={$_GET['number']}'>{$i}</a></li>";
+                                    if (!isset($_GET['search'])) {
+                                        for ($i = 1; $i <= $numPages; $i++) {
+                                            if ($i == $_GET['page']) {
+                                                echo "<li class='page-item active'><a class='page-link' href='./non-compliances.php?page={$i}&number={$_GET['number']}'>{$i}</a></li>";
+                                            } else {
+                                                echo "<li class='page-item'><a class='page-link' href='./non-compliances.php?page={$i}&number={$_GET['number']}'>{$i}</a></li>";
+                                            }
                                         }
                                     }
                                 ?>
-                                <li class="page-item <?=  ($_GET['page'] >= $numPages) ? "disabled" : '';  ?>">
-                                    <a class="page-link" href="./non-compliances.php?page=<?= $_GET['page']+1; ?>&number=<?= $_GET['number']; ?>">
+                                <li class="page-item <?= (count($nonCompliances["result"]) < $_GET['number']) ? "disabled" : '';  ?>">
+                                    <a class="page-link" href="./non-compliances.php?page=<?= $_GET['page']+1; ?>&number=<?= $_GET['number']; ?><?php if (isset($_GET['search'])) echo '&search=' . $_GET['search']; ?>">
                                     next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><desc>Download more icon variants from https://tabler-icons.io/i/chevron-right</desc><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>
                                     </a>
