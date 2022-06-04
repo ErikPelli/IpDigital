@@ -14,10 +14,16 @@
         (checkChar($lot) && checkCharDb($lot))
         &&
         (checkChar($origin) && checkCharDb($origin))
-        &&
-        (checkChar($details) && checkCharDb($details))
     ) {
-        $response = addNonCompliance($origin, $lot, $type, $details);
+        if (!empty($details)) {
+            if(checkChar($details) && checkCharDb($details)) {
+                $response = addNonCompliance($origin, $lot, $type, $details);
+            } else {
+                header("Location: ../non-compliances.php?error=wrongDataInputFormat");
+            }
+        } else {
+            $response = addNonCompliance($origin, $lot, $type);
+        }
 
         if ($response["success"]) {
             header("Location: ../non-compliances.php");

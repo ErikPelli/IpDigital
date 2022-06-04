@@ -103,13 +103,17 @@
         return $manager;
     }
 
-    function addNonCompliance($nonComplianceOrigin, $shippingLot, $nonComplianceType, $comment) {
+    function addNonCompliance($nonComplianceOrigin, $shippingLot, $nonComplianceType, $comment = "") {
         $jsonData = array(
             'nonComplianceOrigin' => $nonComplianceOrigin,
             'nonComplianceType' => $nonComplianceType,
-            'shippingLot' => $shippingLot,
-            'comment' => $comment
+            'shippingLot' => $shippingLot
         );
+
+        if($comment != "") {
+            $jsonData['comment'] = $comment;
+        }
+
         return apiRequest('PUT', 'noncompliance', $jsonData);
     }
 
