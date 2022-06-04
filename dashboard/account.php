@@ -258,7 +258,7 @@
                                 </div>
                                 <div class="col-auto align-self-center">
                                     <span class="form-help" data-bs-toggle="popover" data-bs-placement="top" data-bs-html="true" data-bs-content="<p>If you want to change your email address please contact a System Administrator</p>
-                                        <p class='mb-0'><a href='mailto:administrator@ipdigital.com'>Contact</a></p>
+                                        <p class='mb-0'><a href='mailto:administrator@ipdigital.ga'>Contact</a></p>
                                         ">?</span>
                                 </div>
                             </div>
